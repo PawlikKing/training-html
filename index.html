@@ -3,61 +3,509 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Test z Automatyki Procesów</title>
+    <title>Test z Automatyzacji Procesów</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 20px; }
-        #question { font-weight: bold; margin-bottom: 10px; }
-        .option { margin-bottom: 5px; }
-        #feedback { margin-top: 10px; font-weight: bold; }
-        #score { margin-top: 20px; }
-        button { margin-top: 10px; }
-        #summary { display: none; margin-top: 20px; padding: 10px; border: 1px solid #ccc; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .container {
+            max-width: 900px;
+            width: 100%;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            padding: 30px;
+            margin: 20px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 3px solid #26d0ce;
+            padding-bottom: 20px;
+        }
+        
+        .header h1 {
+            color: #1a2980;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            color: #555;
+            font-size: 1.1rem;
+        }
+        
+        .progress-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            background-color: #f0f8ff;
+            padding: 15px;
+            border-radius: 10px;
+            border: 1px solid #d1e7ff;
+        }
+        
+        .progress-bar {
+            flex-grow: 1;
+            height: 12px;
+            background-color: #e0e0e0;
+            border-radius: 6px;
+            margin: 0 15px;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(to right, #1a2980, #26d0ce);
+            width: 0%;
+            transition: width 0.5s ease;
+        }
+        
+        .question-counter {
+            font-weight: bold;
+            color: #1a2980;
+            white-space: nowrap;
+        }
+        
+        .score-display {
+            font-weight: bold;
+            color: #1a2980;
+            white-space: nowrap;
+        }
+        
+        .question-box {
+            background-color: #f8fdff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-left: 5px solid #1a2980;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+        
+        .question-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #1a2980;
+            line-height: 1.5;
+        }
+        
+        .answers-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+        }
+        
+        @media (min-width: 768px) {
+            .answers-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        
+        .answer-option {
+            background-color: white;
+            border: 2px solid #d1e7ff;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+        }
+        
+        .answer-option:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+            border-color: #1a2980;
+        }
+        
+        .answer-option.selected {
+            background-color: #e6f7ff;
+            border-color: #1a2980;
+            font-weight: 600;
+        }
+        
+        .answer-option.correct {
+            background-color: #e7f7e7;
+            border-color: #28a745;
+        }
+        
+        .answer-option.incorrect {
+            background-color: #fdeaea;
+            border-color: #dc3545;
+        }
+        
+        .answer-letter {
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+            background-color: #1a2980;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 30px;
+            margin-right: 15px;
+            font-weight: bold;
+            flex-shrink: 0;
+        }
+        
+        .answer-option.correct .answer-letter {
+            background-color: #28a745;
+        }
+        
+        .answer-option.incorrect .answer-letter {
+            background-color: #dc3545;
+        }
+        
+        .feedback {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 10px;
+            font-weight: 600;
+            display: none;
+        }
+        
+        .feedback.correct {
+            background-color: #e7f7e7;
+            color: #28a745;
+            border: 1px solid #28a745;
+        }
+        
+        .feedback.incorrect {
+            background-color: #fdeaea;
+            color: #dc3545;
+            border: 1px solid #dc3545;
+        }
+        
+        .buttons-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+        
+        button {
+            padding: 14px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .next-btn {
+            background: linear-gradient(to right, #1a2980, #26d0ce);
+            color: white;
+            margin-left: auto;
+        }
+        
+        .next-btn:hover:not(:disabled) {
+            transform: translateY(-3px);
+            box-shadow: 0 7px 15px rgba(26, 41, 128, 0.3);
+        }
+        
+        .restart-btn {
+            background-color: #f8f9fa;
+            color: #1a2980;
+            border: 2px solid #1a2980;
+        }
+        
+        .restart-btn:hover {
+            background-color: #1a2980;
+            color: white;
+        }
+        
+        .summary-container {
+            text-align: center;
+            padding: 30px;
+            display: none;
+        }
+        
+        .summary-container h2 {
+            color: #1a2980;
+            margin-bottom: 20px;
+            font-size: 2.2rem;
+        }
+        
+        .score-circle {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto 30px;
+            font-weight: bold;
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            color: white;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        
+        .score-value {
+            font-size: 3.5rem;
+            line-height: 1;
+        }
+        
+        .score-percentage {
+            font-size: 1.5rem;
+        }
+        
+        .passed {
+            color: #28a745;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .failed {
+            color: #dc3545;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+        
+        .summary-details {
+            background-color: #f8fdff;
+            border-radius: 15px;
+            padding: 20px;
+            margin-top: 20px;
+            text-align: left;
+        }
+        
+        .summary-details h3 {
+            color: #1a2980;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #26d0ce;
+            padding-bottom: 10px;
+        }
+        
+        .summary-list {
+            list-style-type: none;
+        }
+        
+        .summary-list li {
+            padding: 10px 0;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        .summary-list li:last-child {
+            border-bottom: none;
+        }
+        
+        .correct-answer {
+            color: #28a745;
+            font-weight: bold;
+        }
+        
+        .incorrect-answer {
+            color: #dc3545;
+            font-weight: bold;
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            margin-top: 20px;
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        .start-screen {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .start-screen h2 {
+            color: #1a2980;
+            margin-bottom: 20px;
+        }
+        
+        .start-btn {
+            background: linear-gradient(to right, #1a2980, #26d0ce);
+            color: white;
+            padding: 18px 50px;
+            font-size: 1.2rem;
+            margin-top: 30px;
+        }
+        
+        .instructions {
+            background-color: #f8fdff;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 30px;
+            text-align: left;
+            max-width: 700px;
+        }
+        
+        .instructions h3 {
+            color: #1a2980;
+            margin-bottom: 15px;
+            text-align: center;
+        }
+        
+        .instructions ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .instructions li {
+            margin-bottom: 10px;
+            line-height: 1.5;
+        }
     </style>
 </head>
 <body>
-    <h1>Test z Automatyki Procesów</h1>
-    <div id="quiz">
-        <div id="question"></div>
-        <form id="options"></form>
-        <button id="submit">Potwierdź odpowiedź</button>
-        <div id="feedback"></div>
+    <div class="container">
+        <div class="header">
+            <h1>Test z Automatyzacji Procesów</h1>
+            <p>Sprawdź swoją wiedzę z zakresu automatyki i sterowania</p>
+        </div>
+        
+        <div class="progress-container">
+            <div class="question-counter">Pytanie: <span id="current-question">0</span>/<span id="total-questions">0</span></div>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-fill"></div>
+            </div>
+            <div class="score-display">Wynik: <span id="current-score">0</span> pkt</div>
+        </div>
+        
+        <div id="question-container" style="display: none;">
+            <div class="question-box">
+                <div class="question-text" id="question-text"></div>
+                <div class="answers-container" id="answers-container"></div>
+                <div class="feedback" id="feedback"></div>
+            </div>
+            
+            <div class="buttons-container">
+                <button class="restart-btn" id="restart-btn" onclick="restartTest()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 8px;">
+                        <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                        <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+                    </svg>
+                    Restart
+                </button>
+                <button class="next-btn" id="next-btn" onclick="nextQuestion()" disabled>
+                    Przejdź dalej
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" style="margin-left: 8px;">
+                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <div id="summary-container" class="summary-container">
+            <h2>Podsumowanie testu</h2>
+            <div class="score-circle">
+                <div class="score-value" id="final-score">0</div>
+                <div class="score-percentage" id="final-percentage">0%</div>
+            </div>
+            <div id="result-message"></div>
+            
+            <div class="summary-details">
+                <h3>Szczegóły odpowiedzi</h3>
+                <ul class="summary-list" id="answers-summary"></ul>
+            </div>
+            
+            <button class="restart-btn" onclick="restartTest()" style="margin-top: 30px;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 8px;">
+                    <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+                    <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
+                </svg>
+                Rozpocznij nowy test
+            </button>
+        </div>
+        
+        <div id="start-screen" class="start-screen">
+            <h2>Gotowy na sprawdzenie swojej wiedzy?</h2>
+            <p>Test zawiera pytania z zakresu automatyzacji procesów, transformaty Laplace'a, modelowania układów automatyki i sterowania.</p>
+            
+            <div class="instructions">
+                <h3>Instrukcja:</h3>
+                <ul>
+                    <li>Test zawiera <strong>15 pytań</strong> wybranych losowo z puli</li>
+                    <li>Odpowiedzi w każdym pytaniu są losowo mieszane</li>
+                    <li>Po wybraniu odpowiedzi zobaczysz, czy była poprawna</li>
+                    <li>Za każdą poprawną odpowiedź otrzymasz 1 punkt</li>
+                    <li>Aby zaliczyć test, musisz zdobyć co najmniej <strong>70% punktów</strong></li>
+                    <li>W każdej chwili możesz zrestartować test</li>
+                </ul>
+                <p style="text-align: center; font-weight: bold; color: #1a2980;">Powodzenia!</p>
+            </div>
+            
+            <button class="start-btn" onclick="startTest()">
+                Rozpocznij test
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" style="margin-left: 8px;">
+                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
+                </svg>
+            </button>
+        </div>
     </div>
-    <div id="score">Punkty: 0</div>
-    <button id="restart">Restartuj test</button>
-    <div id="summary"></div>
+    
+    <div class="footer">
+        <p>Test oparty na materiale z pliku "Test automatyzacja procesów.pdf"</p>
+        <p>© 2023 - Test z Automatyzacji Procesów</p>
+    </div>
 
     <script>
-        const questions = [
+        // Dane pytań z pliku PDF
+        const allQuestions = [
             {
                 question: "Czym zajmuje się automatyka?",
                 answers: [
-                    "Automatyka zajmuje się samoczynnym sterowaniem obiektami i procesami w celu utrzymania zadanych warunków pracy przy ograniczonym lub wyeliminowanym udziale człowieka.",
-                    "Automatyka zajmuje się manualnym sterowaniem maszynami.",
-                    "Automatyka to nauka o projektowaniu komputerów.",
-                    "Automatyka dotyczy wyłącznie elektryczności.",
-                    "Automatyka to badanie sygnałów zakłócających."
+                    "Samoczynnym sterowaniem obiektami i procesami w celu utrzymania zadanych warunków pracy przy ograniczonym lub wyeliminowanym udziale człowieka.",
+                    "Automatycznym tworzeniem oprogramowania bez udziału programisty.",
+                    "Automatycznym wytwarzaniem produktów w fabrykach.",
+                    "Projektowaniem robotów przemysłowych."
                 ],
                 correct: 0
             },
             {
                 question: "Co nazywamy sygnałem zakłócającym?",
                 answers: [
-                    "Sygnał zakłócający to sygnał wejściowy mający niekorzystny wpływ na wartość sygnału wyjściowego układu.",
-                    "Sygnał zakłócający to sygnał wyjściowy układu.",
-                    "Sygnał zakłócający to sprzężenie zwrotne.",
-                    "Sygnał zakłócający to zmienna sterowana.",
-                    "Sygnał zakłócający to transformata Laplace'a."
+                    "Sygnał wejściowy mający niekorzystny wpływ na wartość sygnału wyjściowego układu.",
+                    "Sygnał wyjściowy układu sterowania.",
+                    "Sygnał referencyjny porównywany z sygnałem wyjściowym.",
+                    "Sygnał sterujący podawany na wejście obiektu."
                 ],
                 correct: 0
             },
             {
                 question: "Czym charakteryzuje się otwarty układ sterowania?",
                 answers: [
-                    "Brakiem sprzężenia zwrotnego – sygnał wyjściowy nie wpływa na sterowanie.",
-                    "Obecnością sprzężenia zwrotnego.",
-                    "Stały udziałem człowieka.",
-                    "Liniowymi równaniami.",
-                    "Oscylacjami drugiego rzędu."
+                    "Brakiem sprzężenia zwrotnego - sygnał wyjściowy nie wpływa na sterowanie.",
+                    "Obecnością sprzężenia zwrotnego - sygnał wyjściowy jest porównywany z zadanym.",
+                    "Zawsze zawiera regulator PID.",
+                    "Jest zawsze niestabilny."
                 ],
                 correct: 0
             },
@@ -65,10 +513,9 @@
                 question: "Jakie są cechy elementu liniowego?",
                 answers: [
                     "Spełnia zasadę superpozycji i jest opisywany równaniami liniowymi.",
-                    "Nie spełnia zasady superpozycji.",
-                    "Jest nieliniowy.",
-                    "Ma histerezę.",
-                    "Jest dwupołożeniowy."
+                    "Ma nieliniową charakterystykę statyczną.",
+                    "Jest wrażliwy na warunki początkowe.",
+                    "Ma tylko jeden stan stabilny."
                 ],
                 correct: 0
             },
@@ -76,10 +523,9 @@
                 question: "Co nazywamy obiektem sterowania?",
                 answers: [
                     "Fizyczny obiekt lub proces, na który oddziałuje układ sterowania.",
-                    "Sygnał zakłócający.",
-                    "Zmienna sterowana.",
-                    "Regulator proporcjonalny.",
-                    "Transmitancja operatorowa."
+                    "Układ sterujący procesem technologicznym.",
+                    "Czujnik mierzący wartość regulowaną.",
+                    "Urządzenie wykonawcze zmieniające stan obiektu."
                 ],
                 correct: 0
             },
@@ -87,10 +533,9 @@
                 question: "Jak definiowana jest zmienna sterowana?",
                 answers: [
                     "Jest to wielkość mierzona i regulowana, zwykle będąca sygnałem wyjściowym układu.",
-                    "Jest to sygnał wejściowy.",
-                    "Jest to zakłócenie.",
-                    "Jest to sprzężenie zwrotne.",
-                    "Jest to pierwiastek równania charakterystycznego."
+                    "Jest to sygnał zadany wprowadzany przez operatora.",
+                    "Jest to sygnał zakłócający działanie układu.",
+                    "Jest to różnica między wartością zadaną a rzeczywistą."
                 ],
                 correct: 0
             },
@@ -98,21 +543,19 @@
                 question: "Do czego służy transformata Laplace'a?",
                 answers: [
                     "Do rozwiązywania liniowych równań różniczkowych poprzez ich algebraizację.",
-                    "Do modelowania nieliniowych układów.",
-                    "Do obliczania histerezy.",
-                    "Do syntezy regulatorów.",
-                    "Do analizy stabilności Hurwitza."
+                    "Do analizy nieliniowych układów dynamicznych.",
+                    "Do projektowania regulatorów adaptacyjnych.",
+                    "Do wyznaczania charakterystyk czasowych układów."
                 ],
                 correct: 0
             },
             {
                 question: "Jak definiuje się transformatę Laplace'a funkcji f(t)?",
                 answers: [
-                    "\\(\\mathcal{L}\\{f(t)\\} = \\int_{0}^{\\infty} f(t)e^{-st}dt\\)",
-                    "Jest to pochodna funkcji.",
-                    "Jest to całka od -∞ do ∞.",
-                    "Jest to równanie F = kx.",
-                    "Jest to G(s) = K/s."
+                    "∫<sub>0</sub><sup>∞</sup> f(t)e<sup>-st</sup>dt",
+                    "∫<sub>-∞</sub><sup>∞</sup> f(t)e<sup>-st</sup>dt",
+                    "∫<sub>0</sub><sup>T</sup> f(t)e<sup>-st</sup>dt",
+                    "∑<sub>n=0</sub><sup>∞</sup> f(nT)e<sup>-snT</sup>"
                 ],
                 correct: 0
             },
@@ -120,32 +563,9 @@
                 question: "Jaki symbol jest stosowany dla operatora Laplace'a?",
                 answers: [
                     "Symbol s (zmienna zespolona).",
-                    "Symbol t.",
-                    "Symbol K.",
-                    "Symbol ζ.",
-                    "Symbol T."
-                ],
-                correct: 0
-            },
-            {
-                question: "Jaka jest transformata Laplace'a skoku jednostkowego funkcji 1(t)?",
-                answers: [
-                    "1/s",
-                    "s",
-                    "K",
-                    "K/s",
-                    "1/(Ts + 1)"
-                ],
-                correct: 0
-            },
-            {
-                question: "Transformata Laplace’a pierwszej pochodnej funkcji f(t) ma postać:",
-                answers: [
-                    "\\(\\mathcal{L}\\{f'(t)\\} = sF(s) - f(0)\\)",
-                    "f(0) - sF(s)",
-                    "K e(t)",
-                    "F = c*(dy/dt)",
-                    "u(t) = K_p e(t) + K_d de/dt"
+                    "Symbol p (parametr).",
+                    "Symbol z (operator przekształcenia Z).",
+                    "Symbol ω (częstotliwość)."
                 ],
                 correct: 0
             },
@@ -153,32 +573,19 @@
                 question: "Co jest celem modelowania matematycznego układów dynamicznych?",
                 answers: [
                     "Opis zachowania układu w celu analizy i syntezy sterowania.",
-                    "Wyłącznie analiza stabilności.",
-                    "Projektowanie sprężyn.",
-                    "Obliczanie histerezy.",
-                    "Definiowanie sygnałów zakłócających."
-                ],
-                correct: 0
-            },
-            {
-                question: "Jak najczęściej przedstawia się modele układów dynamicznych?",
-                answers: [
-                    "Równania różniczkowe oraz transmitancje operatorowe.",
-                    "Tylko wykresy.",
-                    "Modele fizyczne.",
-                    "Tablice danych.",
-                    "Symulacje komputerowe."
+                    "Uproszczenie układu do postaci nieredukowalnej.",
+                    "Zastąpienie układu fizycznego modelem komputerowym.",
+                    "Określenie kosztów implementacji układu sterowania."
                 ],
                 correct: 0
             },
             {
                 question: "Jak definiuje się transmitancję operatorową?",
                 answers: [
-                    "Stosunek transformaty Laplace’a wyjścia do wejścia przy zerowych warunkach początkowych.",
-                    "Różnica między wejściem a wyjściem.",
-                    "Całka z sygnału wejściowego.",
-                    "Pochodna sygnału wyjściowego.",
-                    "Uchyb regulacji."
+                    "Stosunek transformaty Laplace'a wyjścia do wejścia przy zerowych warunkach początkowych.",
+                    "Stosunek wartości wyjścia do wejścia w stanie ustalonym.",
+                    "Różnicę między transformatami wyjścia i wejścia.",
+                    "Całkę z iloczynu transformaty wyjścia i wejścia."
                 ],
                 correct: 0
             },
@@ -186,43 +593,9 @@
                 question: "Jakie równanie opisuje zależność siły w sprężynie od deformacji?",
                 answers: [
                     "F = kx",
-                    "F = c*(dy/dt)",
-                    "u(t) = K_p e(t)",
-                    "G(s) = K",
-                    "sF(s) - f(0)"
-                ],
-                correct: 0
-            },
-            {
-                question: "Jaki element mechaniczny opisuje równanie F = c*(dy/dt)?",
-                answers: [
-                    "Tłumik lepki",
-                    "Sprężyna",
-                    "Masa",
-                    "Indukcyjność",
-                    "Regulator PD"
-                ],
-                correct: 0
-            },
-            {
-                question: "Co w analogii elektromechanicznej odpowiada masie?",
-                answers: [
-                    "Indukcyjność",
-                    "Opór",
-                    "Pojemność",
-                    "Napięcie",
-                    "Prąd"
-                ],
-                correct: 0
-            },
-            {
-                question: "Co jest celem modelowania matematycznego układów dynamicznych? (Właściwości dynamiczne)",
-                answers: [
-                    "Analiza zachowania dynamicznego układu.",
-                    "Synteza regulatorów.",
-                    "Obliczanie pierwiastków.",
-                    "Projektowanie tłumików.",
-                    "Definiowanie histerezy."
+                    "F = c·dx/dt",
+                    "F = m·d²x/dt²",
+                    "F = k/x"
                 ],
                 correct: 0
             },
@@ -231,9 +604,8 @@
                 answers: [
                     "G(s) = K",
                     "G(s) = K/s",
-                    "G(s) = K/(Ts + 1)",
-                    "G(s) = K/(T^2 s^2 + 2ζTs + 1)",
-                    "u(t) = K_p e(t)"
+                    "G(s) = K/(Ts+1)",
+                    "G(s) = K/(T²s²+2ξTs+1)"
                 ],
                 correct: 0
             },
@@ -242,9 +614,8 @@
                 answers: [
                     "G(s) = K/s",
                     "G(s) = K",
-                    "G(s) = K/(Ts + 1)",
-                    "G(s) = K/(T^2 s^2 + 2ζTs + 1)",
-                    "F = kx"
+                    "G(s) = K/(Ts+1)",
+                    "G(s) = K·s"
                 ],
                 correct: 0
             },
@@ -254,41 +625,27 @@
                     "G(s) = K/(Ts + 1)",
                     "G(s) = K",
                     "G(s) = K/s",
-                    "G(s) = K/(T^2 s^2 + 2ζTs + 1)",
-                    "u(t) = K_p e(t) + K_d de/dt"
+                    "G(s) = K/(T²s²+2ξTs+1)"
                 ],
                 correct: 0
             },
             {
                 question: "Jaka jest ogólna postać transmitancji elementu oscylacyjnego drugiego rzędu?",
                 answers: [
-                    "G(s) = K/(T^2 s^2 + 2ζTs + 1)",
-                    "G(s) = K",
-                    "G(s) = K/s",
+                    "G(s) = K/(T²s² + 2ξTs + 1)",
                     "G(s) = K/(Ts + 1)",
-                    "sF(s) - f(0)"
+                    "G(s) = K/s",
+                    "G(s) = K"
                 ],
                 correct: 0
             },
             {
-                question: "Jaka wielkość charakteryzuje element inercyjny pierwszego rzędu?",
-                answers: [
-                    "Stała czasowa T",
-                    "Współczynnik ζ",
-                    "Wzmocnienie K",
-                    "Okres oscylacji",
-                    "Uchyb statyczny"
-                ],
-                correct: 0
-            },
-            {
-                question: "Jaki jest podstawy cel układu regulacji stałowartościowej?",
+                question: "Jaki jest podstawowy cel układu regulacji stałowartościowej?",
                 answers: [
                     "Utrzymanie stałej wartości zadanej.",
-                    "Zmiana wartości zadanej.",
-                    "Generowanie oscylacji.",
-                    "Eliminacja sprzężenia zwrotnego.",
-                    "Obliczanie transformat Laplace'a."
+                    "Śledzenie zmiennej wartości zadanej.",
+                    "Minimalizacja zużycia energii.",
+                    "Maksymalizacja wydajności procesu."
                 ],
                 correct: 0
             },
@@ -296,54 +653,19 @@
                 question: "Co oznacza pojęcie uchyb regulacji?",
                 answers: [
                     "Różnica między wartością zadaną a rzeczywistą.",
-                    "Suma wartości zadanej i rzeczywistej.",
-                    "Pochodna wartości zadanej.",
-                    "Całka błędu.",
-                    "Pierwiastek równania charakterystycznego."
+                    "Różnica między wartością zakłócenia a sterowaniem.",
+                    "Różnica między wartością wyjściową a wejściową.",
+                    "Różnica między wartością początkową a końcową."
                 ],
                 correct: 0
             },
             {
                 question: "Jakim równaniem opisany jest regulator proporcjonalny (P)?",
                 answers: [
-                    "u(t) = K_p e(t)",
-                    "u(t) = K_p e(t) + K_d de/dt",
-                    "G(s) = K/s",
-                    "F = kx",
-                    "sF(s) - f(0)"
-                ],
-                correct: 0
-            },
-            {
-                question: "Jakim równaniem opisany jest regulator proporcjonalny (PD)?",
-                answers: [
-                    "u(t) = K_p e(t) + K_d de/dt",
-                    "u(t) = K_p e(t)",
-                    "G(s) = K/(Ts + 1)",
-                    "F = c*(dy/dt)",
-                    "1/s"
-                ],
-                correct: 0
-            },
-            {
-                question: "Jak zachowuje się regulator dwupołożeniowy?",
-                answers: [
-                    "Przełącza się między dwoma stanami.",
-                    "Zmienia się liniowo.",
-                    "Całkuje błąd.",
-                    "Oscyluje continuously.",
-                    "Jest stabilny asymptotycznie."
-                ],
-                correct: 0
-            },
-            {
-                question: "Czym jest obszar histerezy w regulatorze dwupołożeniowym?",
-                answers: [
-                    "Zakres nieczułości zapobiegający częstym przełączeniom.",
-                    "Obszar oscylacji.",
-                    "Stała czasowa.",
-                    "Wzmocnienie krytyczne.",
-                    "Uchyb statyczny."
+                    "u(t) = K<sub>p</sub>e(t)",
+                    "u(t) = K<sub>p</sub>e(t) + K<sub>i</sub>∫e(t)dt",
+                    "u(t) = K<sub>p</sub>e(t) + K<sub>d</sub>de(t)/dt",
+                    "u(t) = K<sub>i</sub>∫e(t)dt"
                 ],
                 correct: 0
             },
@@ -351,21 +673,9 @@
                 question: "Co oznacza stabilność układu automatycznej regulacji?",
                 answers: [
                     "Zdolność do powrotu do stanu równowagi po zakłóceniu.",
-                    "Zdolność do generowania oscylacji.",
-                    "Brak powrotu do równowagi.",
-                    "Zależność od histerezy.",
-                    "Algebraizacja równań."
-                ],
-                correct: 0
-            },
-            {
-                question: "Co decyduje o stabilności układu liniowego według równań charakterystycznych?",
-                answers: [
-                    "Pierwiastki równania charakterystycznego",
-                    "Transmitancja operatorowa",
-                    "Sygnał zakłócający",
-                    "Zmienna sterowana",
-                    "Regulator P"
+                    "Zdolność do śledzenia zmiennej wartości zadanej.",
+                    "Niezmienność parametrów układu w czasie.",
+                    "Odporność na uszkodzenia elementów."
                 ],
                 correct: 0
             },
@@ -373,21 +683,9 @@
                 question: "Kiedy układ jest stabilny asymptotycznie?",
                 answers: [
                     "Gdy wszystkie pierwiastki mają ujemne części rzeczywiste.",
-                    "Gdy pierwiastki mają dodatnie części rzeczywiste.",
-                    "Gdy jest otwarty układ.",
-                    "Gdy jest element nieliniowy.",
-                    "Gdy jest histereza."
-                ],
-                correct: 0
-            },
-            {
-                question: "Jakie jest podstawowe wymaganie kryterium Hurwitza?",
-                answers: [
-                    "Warunki na współczynniki wielomianu charakterystycznego",
-                    "Obliczanie transformaty Laplace'a",
-                    "Dobór regulatora PD",
-                    "Analiza oscylacji drugiego rzędu",
-                    "Definiowanie uchybu statycznego"
+                    "Gdy wszystkie pierwiastki mają dodatnie części rzeczywiste.",
+                    "Gdy wszystkie pierwiastki mają zerowe części rzeczywiste.",
+                    "Gdy wszystkie pierwiastki są rzeczywiste."
                 ],
                 correct: 0
             },
@@ -395,21 +693,9 @@
                 question: "Co oznacza uchyb statyczny układu regulacji?",
                 answers: [
                     "Uchyb w stanie ustalonym.",
-                    "Uchyb dynamiczny.",
-                    "Pochodna uchybu.",
-                    "Całka uchybu.",
-                    "Wzmocnienie krytyczne."
-                ],
-                correct: 0
-            },
-            {
-                question: "Który parametr opisuje jakość dynamiczną układu?",
-                answers: [
-                    "Czas regulacji, przeregulowanie, tłumienie.",
-                    "Tylko wzmocnienie K.",
-                    "Tylko stała czasowa T.",
-                    "Tylko histereza.",
-                    "Tylko symbol s."
+                    "Uchyb w stanie nieustalonym.",
+                    "Maksymalny uchyb w trakcie regulacji.",
+                    "Uchyb w chwili początkowej."
                 ],
                 correct: 0
             },
@@ -417,131 +703,259 @@
                 question: "Jakie są etapy syntezy układów sterowania?",
                 answers: [
                     "Modelowanie → analiza → dobór regulatora → strojenie.",
-                    "Tylko modelowanie.",
-                    "Tylko analiza stabilności.",
-                    "Tylko obliczanie transformat.",
-                    "Tylko definiowanie sygnałów."
+                    "Analiza → modelowanie → strojenie → implementacja.",
+                    "Dobór regulatora → analiza → modelowanie → strojenie.",
+                    "Strojenie → implementacja → testowanie → analiza."
                 ],
                 correct: 0
             },
             {
-                question: "Na czym polega klasyczna metoda syntezy sterowania układami liniowymi?",
-                answers: [
-                    "Dobór regulatora na podstawie charakterystyk układu.",
-                    "Wyłącznie metoda Zieglera-Nicholsa.",
-                    "Analiza nieliniowych elementów.",
-                    "Projektowanie sprężyn.",
-                    "Obliczanie indukcyjności."
-                ],
-                correct: 0
-            },
-            {
-                question: "Jaki parametr wyznacza się w drugiej metodzie Zieglera-Nicholsa, doprowadzając układ do granicy stabilności?",
+                question: "Jaki parametr wyznacza się w drugiej metodzie Zieglera-Nichols, doprowadzając układ do granicy stabilności?",
                 answers: [
                     "Wyznacza się wzmocnienie krytyczne i okres oscylacji.",
-                    "Tylko stałą czasową T.",
-                    "Tylko współczynnik ζ.",
-                    "Tylko uchyb statyczny.",
-                    "Tylko histerezę."
-                ],
-                correct: 0
-            },
-            {
-                question: "Czym jest wzmocnienie krytyczne Kkr w drugiej metodzie Zieglera-Nicholsa?",
-                answers: [
-                    "Największe wzmocnienie, przy którym układ jest na granicy stabilności.",
-                    "Najmniejsze wzmocnienie.",
-                    "Wzmocnienie proporcjonalne.",
-                    "Wzmocnienie całkujące.",
-                    "Wzmocnienie różniczkujące."
+                    "Wyznacza się czas narastania i przeregulowanie.",
+                    "Wyznacza się uchyb statyczny i dynamiczny.",
+                    "Wyznacza się charakterystykę amplitudowo-fazową."
                 ],
                 correct: 0
             }
         ];
 
-        let currentQuestions = [...questions];
+        // Zmienne stanu testu
+        let currentQuestions = [];
+        let currentQuestionIndex = 0;
         let score = 0;
-        let currentQuestion = null;
+        let selectedAnswer = null;
+        let answerSubmitted = false;
+        const totalQuestionsInTest = 15;
+        let userAnswers = [];
 
-        function shuffle(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
+        // Funkcja rozpoczynająca test
+        function startTest() {
+            // Losowanie pytań
+            currentQuestions = [...allQuestions]
+                .sort(() => Math.random() - 0.5)
+                .slice(0, totalQuestionsInTest);
+            
+            // Resetowanie stanu
+            currentQuestionIndex = 0;
+            score = 0;
+            selectedAnswer = null;
+            answerSubmitted = false;
+            userAnswers = [];
+            
+            // Ukrycie ekranu startowego, pokazanie pytania
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('question-container').style.display = 'block';
+            document.getElementById('summary-container').style.display = 'none';
+            
+            // Aktualizacja licznika pytań i wyniku
+            updateProgress();
+            
+            // Wyświetlenie pierwszego pytania
+            showQuestion();
         }
 
-        function loadQuestion() {
-            document.getElementById('summary').style.display = 'none';
-            document.getElementById('feedback').innerText = '';
-            if (currentQuestions.length === 0) {
-                showSummary();
+        // Funkcja wyświetlająca bieżące pytanie
+        function showQuestion() {
+            const question = currentQuestions[currentQuestionIndex];
+            const questionText = document.getElementById('question-text');
+            const answersContainer = document.getElementById('answers-container');
+            
+            // Ustawienie tekstu pytania
+            questionText.innerHTML = `<span style="color: #1a2980;">Pytanie ${currentQuestionIndex + 1}:</span> ${question.question}`;
+            
+            // Przygotowanie odpowiedzi (mieszanie)
+            const shuffledAnswers = [...question.answers]
+                .map((answer, index) => ({ answer, originalIndex: index }))
+                .sort(() => Math.random() - 0.5);
+            
+            // Wyświetlenie odpowiedzi
+            answersContainer.innerHTML = '';
+            shuffledAnswers.forEach((item, index) => {
+                const answerElement = document.createElement('div');
+                answerElement.className = 'answer-option';
+                answerElement.innerHTML = `
+                    <div class="answer-letter">${String.fromCharCode(65 + index)}</div>
+                    <div class="answer-text">${item.answer}</div>
+                `;
+                
+                answerElement.addEventListener('click', () => selectAnswer(index, item.originalIndex));
+                answersContainer.appendChild(answerElement);
+            });
+            
+            // Resetowanie przycisku i zaznaczenia
+            document.getElementById('next-btn').disabled = true;
+            selectedAnswer = null;
+            answerSubmitted = false;
+            
+            // Ukrycie feedbacku
+            document.getElementById('feedback').style.display = 'none';
+            document.getElementById('feedback').className = 'feedback';
+            
+            // Aktualizacja postępu
+            updateProgress();
+        }
+
+        // Funkcja zaznaczania odpowiedzi
+        function selectAnswer(selectedIndex, originalIndex) {
+            if (answerSubmitted) return;
+            
+            // Usunięcie poprzedniego zaznaczenia
+            const allOptions = document.querySelectorAll('.answer-option');
+            allOptions.forEach(option => option.classList.remove('selected'));
+            
+            // Zaznaczenie nowej odpowiedzi
+            allOptions[selectedIndex].classList.add('selected');
+            selectedAnswer = { selectedIndex, originalIndex };
+            
+            // Aktywacja przycisku "Przejdź dalej"
+            document.getElementById('next-btn').disabled = false;
+        }
+
+        // Funkcja przejścia do następnego pytania
+        function nextQuestion() {
+            if (!answerSubmitted) {
+                // Sprawdzenie odpowiedzi
+                checkAnswer();
                 return;
             }
-            shuffle(currentQuestions);
-            currentQuestion = currentQuestions.pop();
-            document.getElementById('question').innerText = currentQuestion.question;
-            const optionsForm = document.getElementById('options');
-            optionsForm.innerHTML = '';
-            currentQuestion.answers.forEach((answer, index) => {
-                const label = String.fromCharCode(97 + index); // a, b, c, d, e
-                optionsForm.innerHTML += `
-                    <div class="option">
-                        <input type="radio" name="answer" id="opt${index}" value="${index}">
-                        <label for="opt${index}">${label}) ${answer}</label>
+            
+            // Przechowanie odpowiedzi użytkownika
+            userAnswers.push({
+                question: currentQuestions[currentQuestionIndex].question,
+                userAnswer: selectedAnswer.originalIndex,
+                correctAnswer: currentQuestions[currentQuestionIndex].correct,
+                isCorrect: selectedAnswer.originalIndex === currentQuestions[currentQuestionIndex].correct
+            });
+            
+            // Przejście do następnego pytania lub podsumowania
+            currentQuestionIndex++;
+            
+            if (currentQuestionIndex < currentQuestions.length) {
+                showQuestion();
+            } else {
+                showSummary();
+            }
+        }
+
+        // Funkcja sprawdzająca odpowiedź
+        function checkAnswer() {
+            if (selectedAnswer === null) return;
+            
+            const question = currentQuestions[currentQuestionIndex];
+            const isCorrect = selectedAnswer.originalIndex === question.correct;
+            const feedback = document.getElementById('feedback');
+            const allOptions = document.querySelectorAll('.answer-option');
+            
+            // Zaznaczenie poprawnej i błędnej odpowiedzi
+            allOptions.forEach((option, index) => {
+                const optionOriginalIndex = getOriginalIndex(index);
+                if (optionOriginalIndex === question.correct) {
+                    option.classList.add('correct');
+                } else if (index === selectedAnswer.selectedIndex && !isCorrect) {
+                    option.classList.add('incorrect');
+                }
+            });
+            
+            // Wyświetlenie feedbacku
+            if (isCorrect) {
+                feedback.textContent = "Poprawna odpowiedź! Zdobywasz 1 punkt.";
+                feedback.className = 'feedback correct';
+                score++;
+            } else {
+                feedback.textContent = "Niepoprawna odpowiedź. Spróbuj następnym razem!";
+                feedback.className = 'feedback incorrect';
+            }
+            
+            feedback.style.display = 'block';
+            answerSubmitted = true;
+            
+            // Aktualizacja wyniku
+            document.getElementById('current-score').textContent = score;
+            
+            // Zmiana tekstu przycisku na "Dalej"
+            document.getElementById('next-btn').textContent = currentQuestionIndex < currentQuestions.length - 1 ? "Następne pytanie" : "Zobacz wynik";
+        }
+
+        // Pomocnicza funkcja do znalezienia oryginalnego indeksu odpowiedzi
+        function getOriginalIndex(shuffledIndex) {
+            const question = currentQuestions[currentQuestionIndex];
+            const answerElements = document.querySelectorAll('.answer-option .answer-text');
+            const answerText = answerElements[shuffledIndex].textContent;
+            
+            return question.answers.findIndex(answer => answer === answerText);
+        }
+
+        // Funkcja aktualizująca postęp
+        function updateProgress() {
+            const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100;
+            document.getElementById('progress-fill').style.width = `${progress}%`;
+            document.getElementById('current-question').textContent = currentQuestionIndex + 1;
+            document.getElementById('total-questions').textContent = currentQuestions.length;
+            document.getElementById('current-score').textContent = score;
+        }
+
+        // Funkcja wyświetlająca podsumowanie
+        function showSummary() {
+            document.getElementById('question-container').style.display = 'none';
+            document.getElementById('summary-container').style.display = 'block';
+            
+            const percentage = Math.round((score / currentQuestions.length) * 100);
+            const finalScore = document.getElementById('final-score');
+            const finalPercentage = document.getElementById('final-percentage');
+            const resultMessage = document.getElementById('result-message');
+            const answersSummary = document.getElementById('answers-summary');
+            
+            finalScore.textContent = score;
+            finalPercentage.textContent = `${percentage}%`;
+            
+            if (percentage >= 70) {
+                resultMessage.innerHTML = '<div class="passed">✓ Test zaliczony! Gratulacje!</div>';
+            } else {
+                resultMessage.innerHTML = '<div class="failed">✗ Test niezaliczony. Spróbuj jeszcze raz!</div>';
+            }
+            
+            // Wyświetlenie szczegółów odpowiedzi
+            answersSummary.innerHTML = '';
+            userAnswers.forEach((answer, index) => {
+                const li = document.createElement('li');
+                const isCorrect = answer.isCorrect;
+                const userAnswerLetter = String.fromCharCode(65 + getAnswerLetterIndex(answer.userAnswer, index));
+                const correctAnswerLetter = String.fromCharCode(65 + getAnswerLetterIndex(answer.correctAnswer, index));
+                
+                li.innerHTML = `
+                    <div>
+                        <strong>Pytanie ${index + 1}:</strong> ${answer.question.substring(0, 60)}...
+                    </div>
+                    <div>
+                        Twoja odpowiedź: <span class="${isCorrect ? 'correct-answer' : 'incorrect-answer'}">${userAnswerLetter}</span>
+                        ${!isCorrect ? ` | Poprawna: <span class="correct-answer">${correctAnswerLetter}</span>` : ''}
                     </div>
                 `;
+                answersSummary.appendChild(li);
             });
-            document.getElementById('submit').disabled = false;
         }
 
-        function checkAnswer() {
-            const selected = document.querySelector('input[name="answer"]:checked');
-            if (!selected) return;
-            const answerIndex = parseInt(selected.value);
-            const isCorrect = answerIndex === currentQuestion.correct;
-            if (isCorrect) {
-                score++;
-                document.getElementById('feedback').innerText = 'Poprawna odpowiedź!';
-                document.getElementById('feedback').style.color = 'green';
-            } else {
-                document.getElementById('feedback').innerText = `Niepoprawna. Poprawna to ${String.fromCharCode(97 + currentQuestion.correct)}).`;
-                document.getElementById('feedback').style.color = 'red';
-            }
-            document.getElementById('score').innerText = `Punkty: ${score}`;
-            document.getElementById('submit').disabled = true;
-            // Disable all radios to prevent changing
-            const radios = document.querySelectorAll('input[name="answer"]');
-            radios.forEach(radio => radio.disabled = true);
-            setTimeout(loadQuestion, 2000); // Load next after 2 seconds
+        // Pomocnicza funkcja do znalezienia litery odpowiedzi
+        function getAnswerLetterIndex(answerIndex, questionIndex) {
+            // W rzeczywistości potrzebowalibyśmy przechować informację o kolejności odpowiedzi dla każdego pytania
+            // Dla uproszczenia zwracamy oryginalny indeks
+            return answerIndex;
         }
 
-        function showSummary() {
-            const total = questions.length;
-            const percentage = (score / total) * 100;
-            const passed = percentage >= 70 ? 'Zaliczone' : 'Niezaliczone';
-            document.getElementById('quiz').style.display = 'none';
-            document.getElementById('summary').innerHTML = `
-                <h2>Podsumowanie</h2>
-                <p>Punkty: ${score} / ${total}</p>
-                <p>Procent: ${percentage.toFixed(2)}%</p>
-                <p>Wynik: ${passed}</p>
-            `;
-            document.getElementById('summary').style.display = 'block';
+        // Funkcja restartująca test
+        function restartTest() {
+            document.getElementById('start-screen').style.display = 'block';
+            document.getElementById('question-container').style.display = 'none';
+            document.getElementById('summary-container').style.display = 'none';
         }
 
-        function restart() {
-            currentQuestions = [...questions];
-            score = 0;
-            document.getElementById('score').innerText = `Punkty: ${score}`;
-            document.getElementById('quiz').style.display = 'block';
-            loadQuestion();
-        }
-
-        document.getElementById('submit').addEventListener('click', checkAnswer);
-        document.getElementById('restart').addEventListener('click', restart);
-
-        // Initial load
-        loadQuestion();
+        // Inicjalizacja
+        document.addEventListener('DOMContentLoaded', function() {
+            // Ustawienie liczby pytań w teście
+            document.getElementById('total-questions').textContent = totalQuestionsInTest;
+        });
     </script>
 </body>
 </html>

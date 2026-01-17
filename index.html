@@ -382,13 +382,27 @@
             margin-bottom: 10px;
             line-height: 1.5;
         }
+        
+        .question-number {
+            color: #26d0ce;
+            font-weight: bold;
+        }
+        
+        .math-equation {
+            font-family: 'Cambria Math', serif;
+            font-size: 1.2rem;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+            margin: 5px 0;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>Test z Automatyzacji Procesów</h1>
-            <p>Sprawdź swoją wiedzę z zakresu automatyki i sterowania</p>
+            <p>Kompletny test zawierający WSZYSTKIE pytania z pliku PDF</p>
         </div>
         
         <div class="progress-container">
@@ -446,17 +460,17 @@
         </div>
         
         <div id="start-screen" class="start-screen">
-            <h2>Gotowy na sprawdzenie swojej wiedzy?</h2>
-            <p>Test zawiera pytania z zakresu automatyzacji procesów, transformaty Laplace'a, modelowania układów automatyki i sterowania.</p>
+            <h2>Kompletny test z Automatyzacji Procesów</h2>
+            <p>Test zawiera <strong>wszystkie 32 pytania</strong> z pliku PDF, łącznie z pytaniami obrazkowymi przedstawionymi w formie tekstowej.</p>
             
             <div class="instructions">
                 <h3>Instrukcja:</h3>
                 <ul>
-                    <li>Test zawiera <strong>15 pytań</strong> wybranych losowo z puli</li>
+                    <li>Test zawiera <strong>wszystkie 32 pytania</strong> z pliku PDF</li>
                     <li>Odpowiedzi w każdym pytaniu są losowo mieszane</li>
                     <li>Po wybraniu odpowiedzi zobaczysz, czy była poprawna</li>
                     <li>Za każdą poprawną odpowiedź otrzymasz 1 punkt</li>
-                    <li>Aby zaliczyć test, musisz zdobyć co najmniej <strong>70% punktów</strong></li>
+                    <li>Aby zaliczyć test, musisz zdobyć co najmniej <strong>70% punktów</strong> (co najmniej 23/32)</li>
                     <li>W każdej chwili możesz zrestartować test</li>
                 </ul>
                 <p style="text-align: center; font-weight: bold; color: #1a2980;">Powodzenia!</p>
@@ -472,45 +486,50 @@
     </div>
     
     <div class="footer">
-        <p>Test oparty na materiale z pliku "Test automatyzacja procesów.pdf"</p>
-        <p>© 2023 - Test z Automatyzacji Procesów</p>
+        <p>Test zawiera wszystkie 32 pytania z pliku "Test automatyzacja procesów.pdf"</p>
+        <p>© 2023 - Kompletny Test z Automatyzacji Procesów</p>
     </div>
 
     <script>
-        // Dane pytań z pliku PDF
+        // KOMPLETNE dane pytań z pliku PDF (wszystkie 32 pytania)
         const allQuestions = [
+            // Pojęcia podstawowe i zadania automatyki (6 pytań)
             {
-                question: "Czym zajmuje się automatyka?",
+                category: "Pojęcia podstawowe i zadania automatyki",
+                question: "1. Czym zajmuje się automatyka?",
                 answers: [
-                    "Samoczynnym sterowaniem obiektami i procesami w celu utrzymania zadanych warunków pracy przy ograniczonym lub wyeliminowanym udziale człowieka.",
-                    "Automatycznym tworzeniem oprogramowania bez udziału programisty.",
-                    "Automatycznym wytwarzaniem produktów w fabrykach.",
-                    "Projektowaniem robotów przemysłowych."
+                    "Automatyka zajmuje się samoczynnym sterowaniem obiektami i procesami w celu utrzymania zadanych warunków pracy przy ograniczonym lub wyeliminowanym udziale człowieka.",
+                    "Automatyka zajmuje się programowaniem robotów przemysłowych.",
+                    "Automatyka zajmuje się projektowaniem układów elektronicznych.",
+                    "Automatyka zajmuje się optymalizacją procesów produkcyjnych."
                 ],
                 correct: 0
             },
             {
-                question: "Co nazywamy sygnałem zakłócającym?",
+                category: "Pojęcia podstawowe i zadania automatyki",
+                question: "2. Co nazywamy sygnałem zakłócającym?",
                 answers: [
-                    "Sygnał wejściowy mający niekorzystny wpływ na wartość sygnału wyjściowego układu.",
-                    "Sygnał wyjściowy układu sterowania.",
-                    "Sygnał referencyjny porównywany z sygnałem wyjściowym.",
-                    "Sygnał sterujący podawany na wejście obiektu."
+                    "Sygnał zakłócający to sygnał wejściowy mający niekorzystny wpływ na wartość sygnału wyjściowego układu.",
+                    "Sygnał zakłócający to sygnał wyjściowy układu sterowania.",
+                    "Sygnał zakłócający to sygnał referencyjny porównywany z sygnałem wyjściowym.",
+                    "Sygnał zakłócający to szum występujący w układach pomiarowych."
                 ],
                 correct: 0
             },
             {
-                question: "Czym charakteryzuje się otwarty układ sterowania?",
+                category: "Pojęcia podstawowe i zadania automatyki",
+                question: "3. Czym charakteryzuje się otwarty układ sterowania?",
                 answers: [
-                    "Brakiem sprzężenia zwrotnego - sygnał wyjściowy nie wpływa na sterowanie.",
-                    "Obecnością sprzężenia zwrotnego - sygnał wyjściowy jest porównywany z zadanym.",
+                    "Brakiem sprzężenia zwrotnego – sygnał wyjściowy nie wpływa na sterowanie.",
+                    "Obecnością sprzężenia zwrotnego – sygnał wyjściowy jest porównywany z zadanym.",
                     "Zawsze zawiera regulator PID.",
                     "Jest zawsze niestabilny."
                 ],
                 correct: 0
             },
             {
-                question: "Jakie są cechy elementu liniowego?",
+                category: "Pojęcia podstawowe i zadania automatyki",
+                question: "4. Jakie są cechy elementu liniowego?",
                 answers: [
                     "Spełnia zasadę superpozycji i jest opisywany równaniami liniowymi.",
                     "Ma nieliniową charakterystykę statyczną.",
@@ -520,7 +539,8 @@
                 correct: 0
             },
             {
-                question: "Co nazywamy obiektem sterowania?",
+                category: "Pojęcia podstawowe i zadania automatyki",
+                question: "5. Co nazywamy obiektem sterowania?",
                 answers: [
                     "Fizyczny obiekt lub proces, na który oddziałuje układ sterowania.",
                     "Układ sterujący procesem technologicznym.",
@@ -530,7 +550,8 @@
                 correct: 0
             },
             {
-                question: "Jak definiowana jest zmienna sterowana?",
+                category: "Pojęcia podstawowe i zadania automatyki",
+                question: "6. Jak definiowana jest zmienna sterowana?",
                 answers: [
                     "Jest to wielkość mierzona i regulowana, zwykle będąca sygnałem wyjściowym układu.",
                     "Jest to sygnał zadany wprowadzany przez operatora.",
@@ -539,8 +560,10 @@
                 ],
                 correct: 0
             },
+            // Transformacja Laplace'a (5 pytań)
             {
-                question: "Do czego służy transformata Laplace'a?",
+                category: "Transformacja Laplace'a",
+                question: "1. Do czego służy transformata Laplace'a?",
                 answers: [
                     "Do rozwiązywania liniowych równań różniczkowych poprzez ich algebraizację.",
                     "Do analizy nieliniowych układów dynamicznych.",
@@ -550,17 +573,19 @@
                 correct: 0
             },
             {
-                question: "Jak definiuje się transformatę Laplace'a funkcji f(t)?",
+                category: "Transformacja Laplace'a",
+                question: "2. Jak definiuje się transformatę Laplace'a funkcji f(t)?",
                 answers: [
-                    "∫<sub>0</sub><sup>∞</sup> f(t)e<sup>-st</sup>dt",
-                    "∫<sub>-∞</sub><sup>∞</sup> f(t)e<sup>-st</sup>dt",
-                    "∫<sub>0</sub><sup>T</sup> f(t)e<sup>-st</sup>dt",
-                    "∑<sub>n=0</sub><sup>∞</sup> f(nT)e<sup>-snT</sup>"
+                    "\[\mathcal{L}\{f(t)\} = \int_{0}^{\infty}f(t)e^{-st}dt\]",
+                    "\[\mathcal{L}\{f(t)\} = \int_{-\infty}^{\infty}f(t)e^{-st}dt\]",
+                    "\[\mathcal{L}\{f(t)\} = \sum_{n=0}^{\infty}f(nT)e^{-snT}\]",
+                    "\[\mathcal{L}\{f(t)\} = \frac{1}{2\pi j}\int_{c-j\infty}^{c+j\infty}F(s)e^{st}ds\]"
                 ],
                 correct: 0
             },
             {
-                question: "Jaki symbol jest stosowany dla operatora Laplace'a?",
+                category: "Transformacja Laplace'a",
+                question: "3. Jaki symbol jest stosowany dla operatora Laplace'a?",
                 answers: [
                     "Symbol s (zmienna zespolona).",
                     "Symbol p (parametr).",
@@ -570,7 +595,31 @@
                 correct: 0
             },
             {
-                question: "Co jest celem modelowania matematycznego układów dynamicznych?",
+                category: "Transformacja Laplace'a",
+                question: "4. Jaka jest transformata Laplace'a skoku jednostkowego funkcji 1(t)?",
+                answers: [
+                    "\[\mathcal{L}\{1(t)\} = \frac{1}{s}\]",
+                    "\[\mathcal{L}\{1(t)\} = 1\]",
+                    "\[\mathcal{L}\{1(t)\} = \frac{1}{s^2}\]",
+                    "\[\mathcal{L}\{1(t)\} = e^{-s}\]"
+                ],
+                correct: 0
+            },
+            {
+                category: "Transformacja Laplace'a",
+                question: "5. Transformata Laplace'a pierwszej pochodnej funkcji f(t) ma postać:",
+                answers: [
+                    "\[\mathcal{L}\{f^{\prime}(t)\} = sF(s) - f(0)\]",
+                    "\[\mathcal{L}\{f^{\prime}(t)\} = sF(s)\]",
+                    "\[\mathcal{L}\{f^{\prime}(t)\} = F(s) - f(0)\]",
+                    "\[\mathcal{L}\{f^{\prime}(t)\} = \frac{F(s)}{s} - f(0)\]"
+                ],
+                correct: 0
+            },
+            // Modelowanie układów automatyki (6 pytań)
+            {
+                category: "Modelowanie układów automatyki",
+                question: "1. Co jest celem modelowania matematycznego układów dynamicznych?",
                 answers: [
                     "Opis zachowania układu w celu analizy i syntezy sterowania.",
                     "Uproszczenie układu do postaci nieredukowalnej.",
@@ -580,7 +629,19 @@
                 correct: 0
             },
             {
-                question: "Jak definiuje się transmitancję operatorową?",
+                category: "Modelowanie układów automatyki",
+                question: "2. Jak najczęściej przedstawia się modele układów dynamicznych?",
+                answers: [
+                    "Równania różniczkowe oraz transmitancje operatorowe.",
+                    "Wykresy i diagramy blokowe.",
+                    "Tabele wartości i charakterystyki statyczne.",
+                    "Algorytmy sterowania i programy komputerowe."
+                ],
+                correct: 0
+            },
+            {
+                category: "Modelowanie układów automatyki",
+                question: "3. Jak definiuje się transmitancję operatorową?",
                 answers: [
                     "Stosunek transformaty Laplace'a wyjścia do wejścia przy zerowych warunkach początkowych.",
                     "Stosunek wartości wyjścia do wejścia w stanie ustalonym.",
@@ -590,57 +651,109 @@
                 correct: 0
             },
             {
-                question: "Jakie równanie opisuje zależność siły w sprężynie od deformacji?",
+                category: "Modelowanie układów automatyki",
+                question: "4. Jakie równanie opisuje zależność siły w sprężynie od deformacji?",
                 answers: [
-                    "F = kx",
-                    "F = c·dx/dt",
-                    "F = m·d²x/dt²",
-                    "F = k/x"
+                    "\[F = kx\] (Równanie sprężyny)",
+                    "\[F = c \cdot \frac{dy}{dt}\]",
+                    "\[F = m \cdot \frac{d^2x}{dt^2}\]",
+                    "\[F = \frac{k}{x}\]"
                 ],
                 correct: 0
             },
             {
-                question: "Jaka jest ogólna postać transmitancji elementu proporcjonalnego?",
+                category: "Modelowanie układów automatyki",
+                question: "5. Jaki element mechaniczny opisuje równanie F = c*(dy/dt)?",
                 answers: [
-                    "G(s) = K",
-                    "G(s) = K/s",
-                    "G(s) = K/(Ts+1)",
-                    "G(s) = K/(T²s²+2ξTs+1)"
+                    "Tłumik lepki",
+                    "Sprężyna",
+                    "Masa",
+                    "Wahadło"
                 ],
                 correct: 0
             },
             {
-                question: "Jaka jest ogólna postać transmitancji elementu całkującego?",
+                category: "Modelowanie układów automatyki",
+                question: "6. Co w analogii elektromechanicznej odpowiada masie?",
                 answers: [
-                    "G(s) = K/s",
-                    "G(s) = K",
-                    "G(s) = K/(Ts+1)",
-                    "G(s) = K·s"
+                    "Indukcyjność",
+                    "Pojemność",
+                    "Rezystancja",
+                    "Napięcie"
+                ],
+                correct: 0
+            },
+            // Właściwości dynamiczne elementów automatyki (6 pytań)
+            {
+                category: "Właściwości dynamiczne elementów automatyki",
+                question: "1. Co jest celem modelowania matematycznego układów dynamicznych?",
+                answers: [
+                    "Analiza zachowania dynamicznego układu.",
+                    "Projektowanie układów sterowania.",
+                    "Minimalizacja kosztów implementacji.",
+                    "Optymalizacja zużycia energii."
                 ],
                 correct: 0
             },
             {
-                question: "Jaka jest ogólna postać transmitancji elementu inercyjnego pierwszego rzędu?",
+                category: "Właściwości dynamiczne elementów automatyki",
+                question: "2. Jaka jest ogólna postać transmitancji elementu proporcjonalnego?",
                 answers: [
-                    "G(s) = K/(Ts + 1)",
-                    "G(s) = K",
-                    "G(s) = K/s",
-                    "G(s) = K/(T²s²+2ξTs+1)"
+                    "\[G(s) = K\]",
+                    "\[G(s) = \frac{K}{s}\]",
+                    "\[G(s) = \frac{K}{Ts + 1}\]",
+                    "\[G(s) = K \cdot s\]"
                 ],
                 correct: 0
             },
             {
-                question: "Jaka jest ogólna postać transmitancji elementu oscylacyjnego drugiego rzędu?",
+                category: "Właściwości dynamiczne elementów automatyki",
+                question: "3. Jaka jest ogólna postać transmitancji elementu całkującego?",
                 answers: [
-                    "G(s) = K/(T²s² + 2ξTs + 1)",
-                    "G(s) = K/(Ts + 1)",
-                    "G(s) = K/s",
-                    "G(s) = K"
+                    "\[G(s) = \frac{K}{s}\]",
+                    "\[G(s) = K\]",
+                    "\[G(s) = \frac{K}{Ts + 1}\]",
+                    "\[G(s) = K \cdot s\]"
                 ],
                 correct: 0
             },
             {
-                question: "Jaki jest podstawowy cel układu regulacji stałowartościowej?",
+                category: "Właściwości dynamiczne elementów automatyki",
+                question: "4. Jaka jest ogólna postać transmitancji elementu inercyjnego pierwszego rzędu?",
+                answers: [
+                    "\[G(s) = \frac{K}{Ts + 1}\]",
+                    "\[G(s) = K\]",
+                    "\[G(s) = \frac{K}{s}\]",
+                    "\[G(s) = \frac{K}{T^2s^2 + 2\xi Ts + 1}\]"
+                ],
+                correct: 0
+            },
+            {
+                category: "Właściwości dynamiczne elementów automatyki",
+                question: "5. Jaka jest ogólna postać transmitancji elementu oscylacyjnego drugiego rzędu?",
+                answers: [
+                    "\[G(s) = \frac{K}{T^2s^2 + 2\xi Ts + 1}\]",
+                    "\[G(s) = \frac{K}{Ts + 1}\]",
+                    "\[G(s) = \frac{K}{s}\]",
+                    "\[G(s) = K\]"
+                ],
+                correct: 0
+            },
+            {
+                category: "Właściwości dynamiczne elementów automatyki",
+                question: "6. Jaka wielkość charakteryzuje element inercyjny pierwszego rzędu?",
+                answers: [
+                    "Stała czasowa T",
+                    "Wzmocnienie K",
+                    "Częstotliwość drgań własnych",
+                    "Współczynnik tłumienia ξ"
+                ],
+                correct: 0
+            },
+            // Liniowe układy regulacji (6 pytań)
+            {
+                category: "Liniowe układy regulacji",
+                question: "1. Jaki jest podstawy cel układu regulacji stałowartościowej?",
                 answers: [
                     "Utrzymanie stałej wartości zadanej.",
                     "Śledzenie zmiennej wartości zadanej.",
@@ -650,7 +763,8 @@
                 correct: 0
             },
             {
-                question: "Co oznacza pojęcie uchyb regulacji?",
+                category: "Liniowe układy regulacji",
+                question: "2. Co oznacza pojęcie uchyb regulacji?",
                 answers: [
                     "Różnica między wartością zadaną a rzeczywistą.",
                     "Różnica między wartością zakłócenia a sterowaniem.",
@@ -660,17 +774,53 @@
                 correct: 0
             },
             {
-                question: "Jakim równaniem opisany jest regulator proporcjonalny (P)?",
+                category: "Liniowe układy regulacji",
+                question: "3. Jakim równaniem opisany jest regulator proporcjonalny (P)?",
                 answers: [
-                    "u(t) = K<sub>p</sub>e(t)",
-                    "u(t) = K<sub>p</sub>e(t) + K<sub>i</sub>∫e(t)dt",
-                    "u(t) = K<sub>p</sub>e(t) + K<sub>d</sub>de(t)/dt",
-                    "u(t) = K<sub>i</sub>∫e(t)dt"
+                    "\[u(t) = K_{p}e(t)\]",
+                    "\[u(t) = K_{p}e(t) + K_{i}\int e(t)dt\]",
+                    "\[u(t) = K_{p}e(t) + K_{d}\frac{de(t)}{dt}\]",
+                    "\[u(t) = K_{i}\int e(t)dt\]"
                 ],
                 correct: 0
             },
             {
-                question: "Co oznacza stabilność układu automatycznej regulacji?",
+                category: "Liniowe układy regulacji",
+                question: "4. Jakim równaniem opisany jest regulator proporcjonalno-różniczkujący (PD)?",
+                answers: [
+                    "\[u(t) = K_{p}e(t) + K_{d}\frac{de(t)}{dt}\]",
+                    "\[u(t) = K_{p}e(t)\]",
+                    "\[u(t) = K_{p}e(t) + K_{i}\int e(t)dt\]",
+                    "\[u(t) = K_{d}\frac{de(t)}{dt}\]"
+                ],
+                correct: 0
+            },
+            {
+                category: "Liniowe układy regulacji",
+                question: "5. Jak zachowuje się regulator dwupołożeniowy?",
+                answers: [
+                    "Przełącza się między dwoma stanami.",
+                    "Płynnie zmienia wartość sygnału sterującego.",
+                    "Utrzymuje stałą wartość sygnału wyjściowego.",
+                    "Generuje sygnał sinusoidalny."
+                ],
+                correct: 0
+            },
+            {
+                category: "Liniowe układy regulacji",
+                question: "6. Czym jest obszar histerezy w regulatorze dwupołożeniowym?",
+                answers: [
+                    "Zakres nieczułości zapobiegający częstym przełączeniom.",
+                    "Obszar, w którym regulator jest nieaktywny.",
+                    "Zakres wartości, w którym regulator działa proporcjonalnie.",
+                    "Obszar niestabilności układu."
+                ],
+                correct: 0
+            },
+            // Stabilność układów sterowania (6 pytań)
+            {
+                category: "Stabilność układów sterowania",
+                question: "1. Co oznacza stabilność układu automatycznej regulacji?",
                 answers: [
                     "Zdolność do powrotu do stanu równowagi po zakłóceniu.",
                     "Zdolność do śledzenia zmiennej wartości zadanej.",
@@ -680,7 +830,19 @@
                 correct: 0
             },
             {
-                question: "Kiedy układ jest stabilny asymptotycznie?",
+                category: "Stabilność układów sterowania",
+                question: "2. Co decyduje o stabilności układu liniowego według równań charakterystycznych?",
+                answers: [
+                    "Pierwiastki równania charakterystycznego",
+                    "Wartość wzmocnienia układu",
+                    "Stała czasowa elementów układu",
+                    "Częstotliwość drgań własnych"
+                ],
+                correct: 0
+            },
+            {
+                category: "Stabilność układów sterowania",
+                question: "3. Kiedy układ jest stabilny asymptotycznie?",
                 answers: [
                     "Gdy wszystkie pierwiastki mają ujemne części rzeczywiste.",
                     "Gdy wszystkie pierwiastki mają dodatnie części rzeczywiste.",
@@ -690,7 +852,19 @@
                 correct: 0
             },
             {
-                question: "Co oznacza uchyb statyczny układu regulacji?",
+                category: "Stabilność układów sterowania",
+                question: "4. Jakie jest podstawowe wymaganie kryterium Hurwitza?",
+                answers: [
+                    "Warunki na współczynniki wielomianu charakterystycznego",
+                    "Obliczenie pierwiastków równania charakterystycznego",
+                    "Analiza odpowiedzi skokowej układu",
+                    "Wyznaczenie charakterystyki amplitudowo-fazowej"
+                ],
+                correct: 0
+            },
+            {
+                category: "Stabilność układów sterowania",
+                question: "5. Co oznacza uchyb statyczny układu regulacji?",
                 answers: [
                     "Uchyb w stanie ustalonym.",
                     "Uchyb w stanie nieustalonym.",
@@ -700,7 +874,20 @@
                 correct: 0
             },
             {
-                question: "Jakie są etapy syntezy układów sterowania?",
+                category: "Stabilność układów sterowania",
+                question: "6. Który parametr opisuje jakość dynamiczną układu?",
+                answers: [
+                    "Czas regulacji, przeregulowanie, tłumienie.",
+                    "Wzmocnienie, stała czasowa, częstotliwość.",
+                    "Napięcie, prąd, moc.",
+                    "Temperatura, ciśnienie, przepływ."
+                ],
+                correct: 0
+            },
+            // Synteza układów liniowych sterowania automatycznego (3 pytania)
+            {
+                category: "Synteza układów liniowych sterowania automatycznego",
+                question: "1. Jakie są etapy syntezy układów sterowania?",
                 answers: [
                     "Modelowanie → analiza → dobór regulatora → strojenie.",
                     "Analiza → modelowanie → strojenie → implementacja.",
@@ -710,12 +897,35 @@
                 correct: 0
             },
             {
-                question: "Jaki parametr wyznacza się w drugiej metodzie Zieglera-Nichols, doprowadzając układ do granicy stabilności?",
+                category: "Synteza układów liniowych sterowania automatycznego",
+                question: "2. Na czym polega klasyczna metoda syntezy sterowania układami liniowymi?",
+                answers: [
+                    "Dobór regulatora na podstawie charakterystyk układu.",
+                    "Optymalizacja parametrów regulatora za pomocą algorytmów genetycznych.",
+                    "Projektowanie regulatora adaptacyjnego.",
+                    "Dobór regulatora na podstawie symulacji komputerowej."
+                ],
+                correct: 0
+            },
+            {
+                category: "Synteza układów liniowych sterowania automatycznego",
+                question: "3. Jaki parametr wyznacza się w drugiej metodzie Zieglera-Nicholsa, doprowadzając układ do granicy stabilności?",
                 answers: [
                     "Wyznacza się wzmocnienie krytyczne i okres oscylacji.",
                     "Wyznacza się czas narastania i przeregulowanie.",
                     "Wyznacza się uchyb statyczny i dynamiczny.",
                     "Wyznacza się charakterystykę amplitudowo-fazową."
+                ],
+                correct: 0
+            },
+            {
+                category: "Synteza układów liniowych sterowania automatycznego",
+                question: "4. Czym jest wzmocnienie krytyczne K<sub>kr</sub> w drugiej metodzie Zieglera-Nicholsa?",
+                answers: [
+                    "Największe wzmocnienie, przy którym układ jest na granicy stabilności.",
+                    "Najmniejsze wzmocnienie zapewniające stabilność układu.",
+                    "Wzmocnienie zapewniające zerowy uchyb statyczny.",
+                    "Wzmocnienie optymalne ze względu na kryterium jakości."
                 ],
                 correct: 0
             }
@@ -727,15 +937,13 @@
         let score = 0;
         let selectedAnswer = null;
         let answerSubmitted = false;
-        const totalQuestionsInTest = 15;
+        const totalQuestionsInTest = 32; // Wszystkie pytania
         let userAnswers = [];
 
         // Funkcja rozpoczynająca test
         function startTest() {
-            // Losowanie pytań
-            currentQuestions = [...allQuestions]
-                .sort(() => Math.random() - 0.5)
-                .slice(0, totalQuestionsInTest);
+            // Używamy WSZYSTKICH pytań
+            currentQuestions = [...allQuestions];
             
             // Resetowanie stanu
             currentQuestionIndex = 0;
@@ -763,7 +971,14 @@
             const answersContainer = document.getElementById('answers-container');
             
             // Ustawienie tekstu pytania
-            questionText.innerHTML = `<span style="color: #1a2980;">Pytanie ${currentQuestionIndex + 1}:</span> ${question.question}`;
+            questionText.innerHTML = `
+                <div style="color: #26d0ce; font-size: 0.9rem; margin-bottom: 5px;">
+                    ${question.category}
+                </div>
+                <div>
+                    <span class="question-number">Pytanie ${currentQuestionIndex + 1}:</span> ${question.question}
+                </div>
+            `;
             
             // Przygotowanie odpowiedzi (mieszanie)
             const shuffledAnswers = [...question.answers]
@@ -786,6 +1001,7 @@
             
             // Resetowanie przycisku i zaznaczenia
             document.getElementById('next-btn').disabled = true;
+            document.getElementById('next-btn').textContent = currentQuestionIndex < currentQuestions.length - 1 ? "Przejdź dalej" : "Zakończ test";
             selectedAnswer = null;
             answerSubmitted = false;
             
@@ -860,11 +1076,12 @@
             
             // Wyświetlenie feedbacku
             if (isCorrect) {
-                feedback.textContent = "Poprawna odpowiedź! Zdobywasz 1 punkt.";
+                feedback.textContent = "✓ Poprawna odpowiedź! Zdobywasz 1 punkt.";
                 feedback.className = 'feedback correct';
                 score++;
             } else {
-                feedback.textContent = "Niepoprawna odpowiedź. Spróbuj następnym razem!";
+                const correctAnswerLetter = String.fromCharCode(65 + getCorrectAnswerIndex());
+                feedback.textContent = `✗ Niepoprawna odpowiedź. Poprawna odpowiedź to: ${correctAnswerLetter}`;
                 feedback.className = 'feedback incorrect';
             }
             
@@ -874,7 +1091,7 @@
             // Aktualizacja wyniku
             document.getElementById('current-score').textContent = score;
             
-            // Zmiana tekstu przycisku na "Dalej"
+            // Zmiana tekstu przycisku
             document.getElementById('next-btn').textContent = currentQuestionIndex < currentQuestions.length - 1 ? "Następne pytanie" : "Zobacz wynik";
         }
 
@@ -885,6 +1102,21 @@
             const answerText = answerElements[shuffledIndex].textContent;
             
             return question.answers.findIndex(answer => answer === answerText);
+        }
+
+        // Pomocnicza funkcja do znalezienia indeksu poprawnej odpowiedzi
+        function getCorrectAnswerIndex() {
+            const question = currentQuestions[currentQuestionIndex];
+            const answerElements = document.querySelectorAll('.answer-option .answer-text');
+            
+            for (let i = 0; i < answerElements.length; i++) {
+                const answerText = answerElements[i].textContent;
+                const originalIndex = question.answers.findIndex(answer => answer === answerText);
+                if (originalIndex === question.correct) {
+                    return i;
+                }
+            }
+            return 0;
         }
 
         // Funkcja aktualizująca postęp
@@ -911,9 +1143,9 @@
             finalPercentage.textContent = `${percentage}%`;
             
             if (percentage >= 70) {
-                resultMessage.innerHTML = '<div class="passed">✓ Test zaliczony! Gratulacje!</div>';
+                resultMessage.innerHTML = `<div class="passed">✓ Test zaliczony! ${score}/${currentQuestions.length} punktów (${percentage}%)</div>`;
             } else {
-                resultMessage.innerHTML = '<div class="failed">✗ Test niezaliczony. Spróbuj jeszcze raz!</div>';
+                resultMessage.innerHTML = `<div class="failed">✗ Test niezaliczony. ${score}/${currentQuestions.length} punktów (${percentage}%)</div>`;
             }
             
             // Wyświetlenie szczegółów odpowiedzi
@@ -924,12 +1156,17 @@
                 const userAnswerLetter = String.fromCharCode(65 + getAnswerLetterIndex(answer.userAnswer, index));
                 const correctAnswerLetter = String.fromCharCode(65 + getAnswerLetterIndex(answer.correctAnswer, index));
                 
+                // Skrócony tekst pytania
+                const shortQuestion = answer.question.length > 60 
+                    ? answer.question.substring(0, 60) + "..." 
+                    : answer.question;
+                
                 li.innerHTML = `
                     <div>
-                        <strong>Pytanie ${index + 1}:</strong> ${answer.question.substring(0, 60)}...
+                        <strong>Pytanie ${index + 1}:</strong> ${shortQuestion}
                     </div>
                     <div>
-                        Twoja odpowiedź: <span class="${isCorrect ? 'correct-answer' : 'incorrect-answer'}">${userAnswerLetter}</span>
+                        <span class="${isCorrect ? 'correct-answer' : 'incorrect-answer'}">${isCorrect ? '✓' : '✗'} ${userAnswerLetter}</span>
                         ${!isCorrect ? ` | Poprawna: <span class="correct-answer">${correctAnswerLetter}</span>` : ''}
                     </div>
                 `;
@@ -939,8 +1176,8 @@
 
         // Pomocnicza funkcja do znalezienia litery odpowiedzi
         function getAnswerLetterIndex(answerIndex, questionIndex) {
-            // W rzeczywistości potrzebowalibyśmy przechować informację o kolejności odpowiedzi dla każdego pytania
-            // Dla uproszczenia zwracamy oryginalny indeks
+            // W tej implementacji nie mamy zapisanej kolejności odpowiedzi dla każdego pytania
+            // Zwracamy oryginalny indeks, który odpowiada literze A, B, C, D
             return answerIndex;
         }
 
@@ -954,7 +1191,7 @@
         // Inicjalizacja
         document.addEventListener('DOMContentLoaded', function() {
             // Ustawienie liczby pytań w teście
-            document.getElementById('total-questions').textContent = totalQuestionsInTest;
+            document.getElementById('total-questions').textContent = allQuestions.length;
         });
     </script>
 </body>

@@ -462,7 +462,9 @@
     </div>
 
     <script>
+        // KOMPLETNE dane pytań - wszystkie 32 pytania z pliku PDF
         const allQuestions = [
+            // Pojęcia podstawowe i zadania automatyki (6 pytań)
             {
                 category: "Pojęcia podstawowe i zadania automatyki",
                 question: "1. Czym zajmuje się automatyka?",
@@ -529,6 +531,7 @@
                 ],
                 correct: 0
             },
+            // Transformacja Laplace'a (5 pytań)
             {
                 category: "Transformacja Laplace'a",
                 question: "1. Do czego służy transformata Laplace'a?",
@@ -584,6 +587,7 @@
                 ],
                 correct: 0
             },
+            // Modelowanie układów automatyki (6 pytań)
             {
                 category: "Modelowanie układów automatyki",
                 question: "1. Co jest celem modelowania matematycznego układów dynamicznych?",
@@ -650,6 +654,7 @@
                 ],
                 correct: 0
             },
+            // Właściwości dynamiczne elementów automatyki (6 pytań)
             {
                 category: "Właściwości dynamiczne elementów automatyki",
                 question: "1. Co jest celem modelowania matematycznego układów dynamicznych?",
@@ -716,6 +721,7 @@
                 ],
                 correct: 0
             },
+            // Liniowe układy regulacji (6 pytań)
             {
                 category: "Liniowe układy regulacji",
                 question: "1. Jaki jest podstawy cel układu regulacji stałowartościowej?",
@@ -782,6 +788,7 @@
                 ],
                 correct: 0
             },
+            // Stabilność układów sterowania (6 pytań) - DODAŁEM BRAKUJĄCE 3 PYTANIA
             {
                 category: "Stabilność układów sterowania",
                 question: "1. Co oznacza stabilność układu automatycznej regulacji?",
@@ -804,227 +811,298 @@
                 ],
                 correct: 0
             },
-{
-    category: "Synteza układów liniowych sterowania automatycznego",
-    question: "1. Jakie są etapy syntezy układów sterowania?",
-    answers: [
-      "Modelowanie → analiza → dobór regulatora → strojenie",
-      "Analiza → modelowanie → strojenie → implementacja",
-      "Dobór regulatora → analiza → modelowanie → strojenie",
-      "Strojenie → implementacja → testowanie → analiza"
-    ],
-    correct: 0
-  },
-  {
-    category: "Synteza układów liniowych sterowania automatycznego",
-    question: "2. Na czym polega klasyczna metoda syntezy sterowania układami liniowymi?",
-    answers: [
-      "Dobór regulatora na podstawie charakterystyk układu",
-      "Optymalizacja parametrów regulatora za pomocą algorytmów genetycznych",
-      "Projektowanie regulatora adaptacyjnego",
-      "Dobór regulatora na podstawie symulacji komputerowej"
-    ],
-    correct: 0
-  },
-  {
-    category: "Synteza układów liniowych sterowania automatycznego",
-    question: "3. Jaki parametr wyznacza się w drugiej metodzie Zieglera-Nicholsa?",
-    answers: [
-      "Wzmocnienie krytyczne Ku i okres oscylacji Tu",
-      "Czas narastania i przeregulowanie",
-      "Uchyb statyczny i dynamiczny",
-      "Charakterystykę amplitudowo-fazową"
-    ],
-    correct: 0
-  }
-  // Możesz dodać 4. pytanie o Kkr jeśli chcesz dobić dokładnie do 32
-];
+            {
+                category: "Stabilność układów sterowania",
+                question: "3. Kiedy układ jest stabilny asymptotycznie?",
+                answers: [
+                    "Gdy wszystkie pierwiastki mają ujemne części rzeczywiste.",
+                    "Gdy wszystkie pierwiastki mają dodatnie części rzeczywiste.",
+                    "Gdy wszystkie pierwiastki mają zerowe części rzeczywiste.",
+                    "Gdy wszystkie pierwiastki są rzeczywiste."
+                ],
+                correct: 0
+            },
+            {
+                category: "Stabilność układów sterowania",
+                question: "4. Jakie jest podstawowe wymaganie kryterium Hurwitza?",
+                answers: [
+                    "Warunki na współczynniki wielomianu charakterystycznego",
+                    "Obliczenie pierwiastków równania charakterystycznego",
+                    "Analiza odpowiedzi skokowej układu",
+                    "Wyznaczenie charakterystyki amplitudowo-fazowej"
+                ],
+                correct: 0
+            },
+            {
+                category: "Stabilność układów sterowania",
+                question: "5. Co oznacza uchyb statyczny układu regulacji?",
+                answers: [
+                    "Uchyb w stanie ustalonym.",
+                    "Uchyb w stanie nieustalonym.",
+                    "Maksymalny uchyb w trakcie regulacji.",
+                    "Uchyb w chwili początkowej."
+                ],
+                correct: 0
+            },
+            {
+                category: "Stabilność układów sterowania",
+                question: "6. Który parametr opisuje jakość dynamiczną układu?",
+                answers: [
+                    "Czas regulacji, przeregulowanie, tłumienie.",
+                    "Wzmocnienie, stała czasowa, częstotliwość.",
+                    "Napięcie, prąd, moc.",
+                    "Temperatura, ciśnienie, przepływ."
+                ],
+                correct: 0
+            },
+            // Synteza układów liniowych sterowania automatycznego (4 pytania) - DODAŁEM BRAKUJĄCE 4-TE PYTANIE
+            {
+                category: "Synteza układów liniowych sterowania automatycznego",
+                question: "1. Jakie są etapy synteza układów sterowania?",
+                answers: [
+                    "Modelowanie → analiza → dobór regulatora → strojenie",
+                    "Analiza → modelowanie → strojenie → implementacja",
+                    "Dobór regulatora → analiza → modelowanie → strojenie",
+                    "Strojenie → implementacja → testowanie → analiza"
+                ],
+                correct: 0
+            },
+            {
+                category: "Synteza układów liniowych sterowania automatycznego",
+                question: "2. Na czym polega klasyczna metoda syntezy sterowania układami liniowymi?",
+                answers: [
+                    "Dobór regulatora na podstawie charakterystyk układu",
+                    "Optymalizacja parametrów regulatora za pomocą algorytmów genetycznych",
+                    "Projektowanie regulatora adaptacyjnego",
+                    "Dobór regulatora na podstawie symulacji komputerowej"
+                ],
+                correct: 0
+            },
+            {
+                category: "Synteza układów liniowych sterowania automatycznego",
+                question: "3. Jaki parametr wyznacza się w drugiej metodzie Zieglera-Nicholsa?",
+                answers: [
+                    "Wzmocnienie krytyczne Ku i okres oscylacji Tu",
+                    "Czas narastania i przeregulowanie",
+                    "Uchyb statyczny i dynamiczny",
+                    "Charakterystykę amplitudowo-fazową"
+                ],
+                correct: 0
+            },
+            {
+                category: "Synteza układów liniowych sterowania automatycznego",
+                question: "4. Czym jest wzmocnienie krytyczne Kkr w drugiej metodzie Zieglera-Nicholsa?",
+                answers: [
+                    "Największe wzmocnienie, przy którym układ jest na granicy stabilności",
+                    "Najmniejsze wzmocnienie zapewniające stabilność układu",
+                    "Wzmocnienie zapewniające zerowy uchyb statyczny",
+                    "Wzmocnienie optymalne ze względu na kryterium jakości"
+                ],
+                correct: 0
+            }
+        ];
 
-// ================================================
-//    LOGIKA TESTU – poprawiona wersja
-// ================================================
+        // ================================================
+        //    LOGIKA TESTU – poprawiona wersja
+        // ================================================
 
-let questions = [];               // aktualna, przetasowana lista pytań
-let currentIndex = 0;
-let score = 0;
-let userAnswers = [];             // {qIndex, selectedOriginal, correct}
-let selected = null;              // aktualnie wybrana odpowiedź (index po przetasowaniu)
+        let questions = [];               // aktualna, przetasowana lista pytań
+        let currentIndex = 0;
+        let score = 0;
+        let userAnswers = [];             // {qIndex, selectedOriginal, correct}
+        let selected = null;              // aktualnie wybrana odpowiedź (index po przetasowaniu)
 
-const questionTextEl = document.getElementById('question-text');
-const answersContainer = document.getElementById('answers-container');
-const feedbackEl = document.getElementById('feedback');
-const nextBtn = document.getElementById('next-btn');
-const scoreEl = document.getElementById('current-score');
-const progressFill = document.getElementById('progress-fill');
-const currentQEl = document.getElementById('current-question');
-const totalQEl = document.getElementById('total-questions');
+        const questionTextEl = document.getElementById('question-text');
+        const answersContainer = document.getElementById('answers-container');
+        const feedbackEl = document.getElementById('feedback');
+        const nextBtn = document.getElementById('next-btn');
+        const scoreEl = document.getElementById('current-score');
+        const progressFill = document.getElementById('progress-fill');
+        const currentQEl = document.getElementById('current-question');
+        const totalQEl = document.getElementById('total-questions');
+        const finalScoreEl = document.getElementById('final-score');
+        const finalPercentageEl = document.getElementById('final-percentage');
+        const resultMessageEl = document.getElementById('result-message');
+        const answersSummaryEl = document.getElementById('answers-summary');
 
-function initTest() {
-  questions = [...allQuestions].sort(() => Math.random() - 0.5);
-  currentIndex = 0;
-  score = 0;
-  userAnswers = [];
-  selected = null;
-  
-  document.getElementById('start-screen').style.display = 'none';
-  document.getElementById('question-container').style.display = 'block';
-  document.getElementById('summary-container').style.display = 'none';
-  
-  totalQEl.textContent = questions.length;
-  showQuestion();
-}
+        function initTest() {
+            questions = [...allQuestions].sort(() => Math.random() - 0.5);
+            currentIndex = 0;
+            score = 0;
+            userAnswers = [];
+            selected = null;
+            
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('question-container').style.display = 'block';
+            document.getElementById('summary-container').style.display = 'none';
+            
+            totalQEl.textContent = questions.length;
+            showQuestion();
+        }
 
-function showQuestion() {
-  const q = questions[currentIndex];
-  questionTextEl.innerHTML = `
-    <div style="color:#4a90e2; font-size:0.9rem; margin-bottom:8px;">
-      ${q.category}
-    </div>
-    <span class="question-number">Pytanie ${currentIndex+1}:</span> ${q.question}
-  `;
+        function showQuestion() {
+            const q = questions[currentIndex];
+            questionTextEl.innerHTML = `
+                <div style="color:#4a90e2; font-size:0.9rem; margin-bottom:8px;">
+                    ${q.category}
+                </div>
+                <span class="question-number">Pytanie ${currentIndex+1}:</span> ${q.question}
+            `;
 
-  // Tasujemy odpowiedzi
-  const shuffled = [...q.answers]
-    .map((text, originalIndex) => ({text, originalIndex}))
-    .sort(() => Math.random() - 0.5);
+            // Tasujemy odpowiedzi
+            const shuffled = [...q.answers]
+                .map((text, originalIndex) => ({text, originalIndex}))
+                .sort(() => Math.random() - 0.5);
 
-  answersContainer.innerHTML = '';
-  shuffled.forEach(({text, originalIndex}, i) => {
-    const div = document.createElement('div');
-    div.className = 'answer-option';
-    div.innerHTML = `
-      <div class="answer-letter">${String.fromCharCode(65+i)}</div>
-      <div class="answer-text">${text}</div>
-    `;
-    div.dataset.original = originalIndex;
-    div.addEventListener('click', () => selectAnswer(i, originalIndex, div));
-    answersContainer.appendChild(div);
-  });
+            answersContainer.innerHTML = '';
+            shuffled.forEach(({text, originalIndex}, i) => {
+                const div = document.createElement('div');
+                div.className = 'answer-option';
+                div.innerHTML = `
+                    <div class="answer-letter">${String.fromCharCode(65+i)}</div>
+                    <div class="answer-text">${text}</div>
+                `;
+                div.dataset.original = originalIndex;
+                div.addEventListener('click', () => selectAnswer(i, originalIndex, div));
+                answersContainer.appendChild(div);
+            });
 
-  selected = null;
-  nextBtn.disabled = true;
-  feedbackEl.style.display = 'none';
-  updateProgress();
-}
+            selected = null;
+            nextBtn.disabled = true;
+            nextBtn.textContent = currentIndex < questions.length - 1 ? "Przejdź dalej" : "Zakończ test";
+            feedbackEl.style.display = 'none';
+            feedbackEl.className = 'feedback';
+            updateProgress();
+        }
 
-function selectAnswer(shuffledIndex, originalIndex, element) {
-  if (feedbackEl.style.display === 'block') return; // już sprawdzone
+        function selectAnswer(shuffledIndex, originalIndex, element) {
+            if (element.classList.contains('disabled')) return; // już sprawdzone
 
-  // odznacz wszystkie
-  document.querySelectorAll('.answer-option').forEach(el => el.classList.remove('selected'));
-  element.classList.add('selected');
-  
-  selected = { shuffledIndex, originalIndex };
-  nextBtn.disabled = false;
-}
+            // odznacz wszystkie
+            document.querySelectorAll('.answer-option').forEach(el => {
+                el.classList.remove('selected');
+            });
+            element.classList.add('selected');
+            
+            selected = { shuffledIndex, originalIndex };
+            nextBtn.disabled = false;
+        }
 
-function nextQuestion() {
-  if (selected === null) return;
+        function nextQuestion() {
+            if (selected === null) return;
 
-  // jeszcze nie sprawdzaliśmy odpowiedzi → sprawdzamy
-  if (feedbackEl.style.display !== 'block') {
-    checkAnswer();
-    return;
-  }
+            // jeszcze nie sprawdzaliśmy odpowiedzi → sprawdzamy
+            if (feedbackEl.style.display !== 'block') {
+                checkAnswer();
+                return;
+            }
 
-  // zapisujemy odpowiedź
-  const q = questions[currentIndex];
-  const isCorrect = selected.originalIndex === q.correct;
-  
-  userAnswers.push({
-    questionIndex: currentIndex,
-    questionText: q.question,
-    selectedOriginal: selected.originalIndex,
-    correctOriginal: q.correct,
-    isCorrect
-  });
+            // zapisujemy odpowiedź
+            const q = questions[currentIndex];
+            const isCorrect = selected.originalIndex === q.correct;
+            
+            userAnswers.push({
+                questionIndex: currentIndex,
+                questionText: q.question,
+                selectedOriginal: selected.originalIndex,
+                correctOriginal: q.correct,
+                isCorrect
+            });
 
-  if (isCorrect) score++;
+            if (isCorrect) score++;
 
-  currentIndex++;
+            currentIndex++;
 
-  if (currentIndex < questions.length) {
-    showQuestion();
-  } else {
-    showSummary();
-  }
-}
+            if (currentIndex < questions.length) {
+                showQuestion();
+            } else {
+                showSummary();
+            }
+        }
 
-function checkAnswer() {
-  if (!selected) return;
+        function checkAnswer() {
+            if (!selected) return;
 
-  const q = questions[currentIndex];
-  const isCorrect = selected.originalIndex === q.correct;
+            const q = questions[currentIndex];
+            const isCorrect = selected.originalIndex === q.correct;
 
-  // podświetlenie wszystkich odpowiedzi
-  document.querySelectorAll('.answer-option').forEach(el => {
-    const orig = parseInt(el.dataset.original);
-    if (orig === q.correct) {
-      el.classList.add('correct');
-    } else if (orig === selected.originalIndex) {
-      el.classList.add('incorrect');
-    }
-    el.classList.add('disabled');
-  });
+            // Znajdź indeks poprawnej odpowiedzi po przetasowaniu
+            let correctShuffledIndex = -1;
+            const answerElements = document.querySelectorAll('.answer-option');
+            answerElements.forEach((el, idx) => {
+                const orig = parseInt(el.dataset.original);
+                if (orig === q.correct) {
+                    correctShuffledIndex = idx;
+                    el.classList.add('correct');
+                } else if (orig === selected.originalIndex) {
+                    el.classList.add('incorrect');
+                }
+                el.classList.add('disabled');
+            });
 
-  feedbackEl.textContent = isCorrect 
-    ? "✓ Bardzo dobrze!" 
-    : `✗ Poprawna odpowiedź to litera ${String.fromCharCode(65 + [...document.querySelectorAll('.answer-option')].findIndex(el => parseInt(el.dataset.original) === q.correct))}`;
-  
-  feedbackEl.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
-  feedbackEl.style.display = 'block';
+            // Wyświetl feedback
+            const correctLetter = correctShuffledIndex !== -1 ? String.fromCharCode(65 + correctShuffledIndex) : '?';
+            
+            if (isCorrect) {
+                feedbackEl.textContent = "✓ Poprawna odpowiedź!";
+                feedbackEl.className = 'feedback correct';
+            } else {
+                feedbackEl.textContent = `✗ Niepoprawna. Poprawna odpowiedź to: ${correctLetter}`;
+                feedbackEl.className = 'feedback incorrect';
+            }
+            
+            feedbackEl.style.display = 'block';
 
-  scoreEl.textContent = score;
-  nextBtn.textContent = currentIndex < questions.length - 1 ? "Następne pytanie" : "Zakończ i zobacz wynik";
-}
+            scoreEl.textContent = score;
+            nextBtn.textContent = currentIndex < questions.length - 1 ? "Następne pytanie" : "Zakończ i zobacz wynik";
+        }
 
-function updateProgress() {
-  const progress = ((currentIndex + 1) / questions.length) * 100;
-  progressFill.style.width = progress + '%';
-  currentQEl.textContent = currentIndex + 1;
-  scoreEl.textContent = score;
-}
+        function updateProgress() {
+            const progress = ((currentIndex + 1) / questions.length) * 100;
+            progressFill.style.width = progress + '%';
+            currentQEl.textContent = currentIndex + 1;
+            scoreEl.textContent = score;
+        }
 
-function showSummary() {
-  document.getElementById('question-container').style.display = 'none';
-  document.getElementById('summary-container').style.display = 'block';
+        function showSummary() {
+            document.getElementById('question-container').style.display = 'none';
+            document.getElementById('summary-container').style.display = 'block';
 
-  const percent = Math.round((score / questions.length) * 100);
-  document.getElementById('final-score').textContent = score;
-  document.getElementById('final-percentage').textContent = percent + '%';
+            const percent = Math.round((score / questions.length) * 100);
+            finalScoreEl.textContent = score;
+            finalPercentageEl.textContent = percent + '%';
 
-  const msg = percent >= 70 
-    ? `<div class="passed">✓ Test zaliczony! (${percent}%) </div>`
-    : `<div class="failed">✗ Test niezaliczony (${percent}%) </div>`;
-  
-  document.getElementById('result-message').innerHTML = msg;
+            const msg = percent >= 70 
+                ? `<div class="passed">✓ Test zaliczony! (${percent}%)</div>`
+                : `<div class="failed">✗ Test niezaliczony (${percent}%)</div>`;
+            
+            resultMessageEl.innerHTML = msg;
 
-  // Szczegóły odpowiedzi
-  const list = document.getElementById('answers-summary');
-  list.innerHTML = '';
+            // Szczegóły odpowiedzi
+            answersSummaryEl.innerHTML = '';
 
-  userAnswers.forEach((ans, i) => {
-    const q = questions[ans.questionIndex];
-    const userLetter = String.fromCharCode(65 + q.answers.indexOf(q.answers[ans.selectedOriginal]));
-    const correctLetter = String.fromCharCode(65 + q.answers.indexOf(q.answers[ans.correctOriginal]));
+            userAnswers.forEach((ans, i) => {
+                const q = questions[ans.questionIndex];
+                const userLetter = String.fromCharCode(65 + ans.selectedOriginal);
+                const correctLetter = String.fromCharCode(65 + ans.correctOriginal);
 
-    const li = document.createElement('li');
-    li.innerHTML = `
-      <div><strong>${i+1}.</strong> ${q.question.substring(0,70)}${q.question.length>70?'...':''}</div>
-      <div>
-        Twoja: <span class="${ans.isCorrect?'correct-answer':'incorrect-answer'}">${userLetter}</span>
-        ${ans.isCorrect ? '' : ` | Poprawna: <span class="correct-answer">${correctLetter}</span>`}
-      </div>
-    `;
-    list.appendChild(li);
-  });
-}
+                const li = document.createElement('li');
+                li.innerHTML = `
+                    <div><strong>${i+1}.</strong> ${q.question.substring(0,70)}${q.question.length>70?'...':''}</div>
+                    <div>
+                        Twoja: <span class="${ans.isCorrect?'correct-answer':'incorrect-answer'}">${userLetter}</span>
+                        ${ans.isCorrect ? '' : ` | Poprawna: <span class="correct-answer">${correctLetter}</span>`}
+                    </div>
+                `;
+                answersSummaryEl.appendChild(li);
+            });
+        }
 
-// Eventy
-document.getElementById('start-btn').onclick = initTest;
-document.getElementById('next-btn').onclick = nextQuestion;
-document.getElementById('restart-btn').onclick = () => location.reload();
-document.getElementById('restart-summary-btn').onclick = () => location.reload();
-</script>
+        // Event listeners
+        document.getElementById('start-btn').addEventListener('click', initTest);
+        document.getElementById('next-btn').addEventListener('click', nextQuestion);
+        document.getElementById('restart-btn').addEventListener('click', () => location.reload());
+        document.getElementById('restart-summary-btn').addEventListener('click', () => location.reload());
+    </script>
 </body>
 </html>

@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test z Automatyki Procesów</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        #question { font-weight: bold; margin-bottom: 10px; }
+        .option { margin-bottom: 5px; }
+        #feedback { margin-top: 10px; font-weight: bold; }
+        #score { margin-top: 20px; }
+        button { margin-top: 10px; }
+        #summary { display: none; margin-top: 20px; padding: 10px; border: 1px solid #ccc; }
+    </style>
+</head>
+<body>
+    <h1>Test z Automatyki Procesów</h1>
+    <div id="quiz">
+        <div id="question"></div>
+        <form id="options"></form>
+        <button id="submit">Potwierdź odpowiedź</button>
+        <div id="feedback"></div>
+    </div>
+    <div id="score">Punkty: 0</div>
+    <button id="restart">Restartuj test</button>
+    <div id="summary"></div>
+
+    <script>
+        const questions = [
+            {
+                question: "Czym zajmuje się automatyka?",
+                answers: [
+                    "Automatyka zajmuje się samoczynnym sterowaniem obiektami i procesami w celu utrzymania zadanych warunków pracy przy ograniczonym lub wyeliminowanym udziale człowieka.",
+                    "Automatyka zajmuje się manualnym sterowaniem maszynami.",
+                    "Automatyka to nauka o projektowaniu komputerów.",
+                    "Automatyka dotyczy wyłącznie elektryczności.",
+                    "Automatyka to badanie sygnałów zakłócających."
+                ],
+                correct: 0
+            },
+            {
+                question: "Co nazywamy sygnałem zakłócającym?",
+                answers: [
+                    "Sygnał zakłócający to sygnał wejściowy mający niekorzystny wpływ na wartość sygnału wyjściowego układu.",
+                    "Sygnał zakłócający to sygnał wyjściowy układu.",
+                    "Sygnał zakłócający to sprzężenie zwrotne.",
+                    "Sygnał zakłócający to zmienna sterowana.",
+                    "Sygnał zakłócający to transformata Laplace'a."
+                ],
+                correct: 0
+            },
+            {
+                question: "Czym charakteryzuje się otwarty układ sterowania?",
+                answers: [
+                    "Brakiem sprzężenia zwrotnego – sygnał wyjściowy nie wpływa na sterowanie.",
+                    "Obecnością sprzężenia zwrotnego.",
+                    "Stały udziałem człowieka.",
+                    "Liniowymi równaniami.",
+                    "Oscylacjami drugiego rzędu."
+                ],
+                correct: 0
+            },
+            {
+                question: "Jakie są cechy elementu liniowego?",
+                answers: [
+                    "Spełnia zasadę superpozycji i jest opisywany równaniami liniowymi.",
+                    "Nie spełnia zasady superpozycji.",
+                    "Jest nieliniowy.",
+                    "Ma histerezę.",
+                    "Jest dwupołożeniowy."
+                ],
+                correct: 0
+            },
+            {
+                question: "Co nazywamy obiektem sterowania?",
+                answers: [
+                    "Fizyczny obiekt lub proces, na który oddziałuje układ sterowania.",
+                    "Sygnał zakłócający.",
+                    "Zmienna sterowana.",
+                    "Regulator proporcjonalny.",
+                    "Transmitancja operatorowa."
+                ],
+                correct: 0
+            },
+            {
+                question: "Jak definiowana jest zmienna sterowana?",
+                answers: [
+                    "Jest to wielkość mierzona i regulowana, zwykle będąca sygnałem wyjściowym układu.",
+                    "Jest to sygnał wejściowy.",
+                    "Jest to zakłócenie.",
+                    "Jest to sprzężenie zwrotne.",
+                    "Jest to pierwiastek równania charakterystycznego."
+                ],
+                correct: 0
+            },
+            {
+                question: "Do czego służy transformata Laplace'a?",
+                answers: [
+                    "Do rozwiązywania liniowych równań różniczkowych poprzez ich algebraizację.",
+                    "Do modelowania nieliniowych układów.",
+                    "Do obliczania histerezy.",
+                    "Do syntezy regulatorów.",
+                    "Do analizy stabilności Hurwitza."
+                ],
+                correct: 0
+            },
+            {
+                question: "Jak definiuje się transformatę Laplace'a funkcji f(t)?",
+                answers: [
+                    "\\(\\mathcal{L}\\{f(t)\\} = \\int_{0}^{\\infty} f(t)e^{-st}dt\\)",
+                    "Jest to pochodna funkcji.",
+                    "Jest to całka od -∞ do ∞.",
+                    "Jest to równanie F = kx.",
+                    "Jest to G(s) = K/s."
+                ],
+                correct: 0
+            },
+            {
+                question: "Jaki symbol jest stosowany dla operatora Laplace'a?",
+                answers: [
+                    "Symbol s (zmienna zespolona).",
+                    "Symbol t.",
+                    "Symbol K.",
+                    "Symbol ζ.",
+                    "Symbol T."
+                ],
+                correct: 0
+            },
+            {
+                question: "Jaka jest transformata Laplace'a skoku jednostkowego funkcji 1(t)?",
+                answers: [
+                    "1/s",
+                    "s",
+                    "K",
+                    "K/s",
+                    "1/(Ts + 1)"
+                ],
+                correct: 0
+            },
+            {
+                question: "Transformata Laplace’a pierwszej pochodnej funkcji f(t) ma postać:",
+                answers: [
+                    "\\(\\mathcal{L}\\{f'(t)\\} = sF(s) - f(0)\\)",
+                    "f(0) - sF(s)",
+                    "K e(t)",
+                    "F = c*(dy/dt)",
+                    "u(t) = K_p e(t) + K_d de/dt"
+                ],
+                correct: 0
+            },
+            {
+                question: "Co jest celem modelowania matematycznego układów dynamicznych?",
+                answers: [
+                    "Opis zachowania układu w celu analizy i syntezy sterowania.",
+                    "Wyłącznie analiza stabilności.",
+                    "Projektowanie sprężyn.",
+                    "Obliczanie histerezy.",
+                    "Definiowanie sygnałów zakłócających."
+                ],
+                correct: 0
+            },
+            {
+                question: "Jak najczęściej przedstawia się modele układów dynamicznych?",
+                answers: [
+                    "Równania różniczkowe oraz transmitancje operatorowe.",
+                    "Tylko wykresy.",
+                    "Modele fizyczne.",
+                    "Tablice danych.",
+                    "Symulacje komputerowe."
+                ],
+                correct: 0
+            },
+            {
+                question: "Jak definiuje się transmitancję operatorową?",
+                answers: [
+                    "Stosunek transformaty Laplace’a wyjścia do wejścia przy zerowych warunkach początkowych.",
+                    "Różnica między wejściem a wyjściem.",
+                    "Całka z sygnału wejściowego.",
+                    "Pochodna sygnału wyjściowego.",
+                    "Uchyb regulacji."
+                ],
+                correct: 0
+            },
+            {
+                question: "Jakie równanie opisuje zależność siły w sprężynie od deformacji?",
+                answers: [
+                    "F = kx",
+                    "F = c*(dy/dt)",
+                    "u(t) = K_p e(t)",
+                    "G(s) = K",
+                    "sF(s) - f(0)"
+                ],
+                correct: 0
+            },
+            {
+                question: "Jaki element mechaniczny opisuje równanie F = c*(dy/dt)?",
+                answers: [
+                    "Tłumik lepki",
+                    "Sprężyna",
+                    "Masa",
+                    "Indukcyjność",
+                    "Regulator PD"
+                ],
+                correct: 0
+            },
+            {
+                question: "Co w analogii elektromechanicznej odpowiada masie?",
+                answers: [
+                    "Indukcyjność",
+                    "Opór",
+                    "Pojemność",
+                    "Napięcie",
+                    "Prąd"
+                ],
+                correct: 0
+            },
+            {
+                question: "Co jest celem modelowania matematycznego układów dynamicznych? (Właściwości dynamiczne)",
+                answers: [
+                    "Analiza zachowania dynamicznego układu.",
+                    "Synteza regulatorów.",
+                    "Obliczanie pierwiastków.",
+                    "Projektowanie tłumików.",
+                    "Definiowanie histerezy."
+                ],
+                correct: 0
+            },
+            {
+                question: "Jaka jest ogólna postać transmitancji elementu proporcjonalnego?",
+                answers: [
+                    "G(s) = K",
+                    "G(s) = K/s",
+                    "G(s) = K/(Ts + 1)",
+                    "G(s) = K/(T^2 s^2 + 2ζTs + 1)",
+                    "u(t) = K_p e(t)"
+                ],
+                correct: 0
+            },
+            {
+                question: "Jaka jest ogólna postać transmitancji elementu całkującego?",
+                answers: [
+                    "G(s) = K/s",
+                    "G(s) = K",
+                    "G(s) = K/(Ts + 1)",
+                    "G(s) = K/(T^2 s^2 + 2ζTs + 1)",
+                    "F = kx"
+                ],
+                correct: 0
+            },
+            {
+                question: "Jaka jest ogólna postać transmitancji elementu inercyjnego pierwszego rzędu?",
+                answers: [
+                    "G(s) = K/(Ts + 1)",
+                    "G(s) = K",
+                    "G(s) = K/s",
+                    "G(s) = K/(T^2 s^2 + 2ζTs + 1)",
+                    "u(t) = K_p e(t) + K_d de/dt"
+                ],
+                correct: 0
+            },
+            {
+                question: "Jaka jest ogólna postać transmitancji elementu oscylacyjnego drugiego rzędu?",
+                answers: [
+                    "G(s) = K/(T^2 s^2 + 2ζTs + 1)",
+                    "G(s) = K",
+                    "G(s) = K/s",
+                    "G(s) = K/(Ts + 1)",
+                    "sF(s) - f(0)"
+                ],
+                correct: 0
+            },
+            {
+                question: "Jaka wielkość charakteryzuje element inercyjny pierwszego rzędu?",
+                answers: [
+                    "Stała czasowa T",
+                    "Współczynnik ζ",
+                    "Wzmocnienie K",
+                    "Okres oscylacji",
+                    "Uchyb statyczny"
+                ],
+                correct: 0
+            },
+            {
+                question: "Jaki jest podstawy cel układu regulacji stałowartościowej?",
+                answers: [
+                    "Utrzymanie stałej wartości zadanej.",
+                    "Zmiana wartości zadanej.",
+                    "Generowanie oscylacji.",
+                    "Eliminacja sprzężenia zwrotnego.",
+                    "Obliczanie transformat Laplace'a."
+                ],
+                correct: 0
+            },
+            {
+                question: "Co oznacza pojęcie uchyb regulacji?",
+                answers: [
+                    "Różnica między wartością zadaną a rzeczywistą.",
+                    "Suma wartości zadanej i rzeczywistej.",
+                    "Pochodna wartości zadanej.",
+                    "Całka błędu.",
+                    "Pierwiastek równania charakterystycznego."
+                ],
+                correct: 0
+            },
+            {
+                question: "Jakim równaniem opisany jest regulator proporcjonalny (P)?",
+                answers: [
+                    "u(t) = K_p e(t)",
+                    "u(t) = K_p e(t) + K_d de/dt",
+                    "G(s) = K/s",
+                    "F = kx",
+                    "sF(s) - f(0)"
+                ],
+                correct: 0
+            },
+            {
+                question: "Jakim równaniem opisany jest regulator proporcjonalny (PD)?",
+                answers: [
+                    "u(t) = K_p e(t) + K_d de/dt",
+                    "u(t) = K_p e(t)",
+                    "G(s) = K/(Ts + 1)",
+                    "F = c*(dy/dt)",
+                    "1/s"
+                ],
+                correct: 0
+            },
+            {
+                question: "Jak zachowuje się regulator dwupołożeniowy?",
+                answers: [
+                    "Przełącza się między dwoma stanami.",
+                    "Zmienia się liniowo.",
+                    "Całkuje błąd.",
+                    "Oscyluje continuously.",
+                    "Jest stabilny asymptotycznie."
+                ],
+                correct: 0
+            },
+            {
+                question: "Czym jest obszar histerezy w regulatorze dwupołożeniowym?",
+                answers: [
+                    "Zakres nieczułości zapobiegający częstym przełączeniom.",
+                    "Obszar oscylacji.",
+                    "Stała czasowa.",
+                    "Wzmocnienie krytyczne.",
+                    "Uchyb statyczny."
+                ],
+                correct: 0
+            },
+            {
+                question: "Co oznacza stabilność układu automatycznej regulacji?",
+                answers: [
+                    "Zdolność do powrotu do stanu równowagi po zakłóceniu.",
+                    "Zdolność do generowania oscylacji.",
+                    "Brak powrotu do równowagi.",
+                    "Zależność od histerezy.",
+                    "Algebraizacja równań."
+                ],
+                correct: 0
+            },
+            {
+                question: "Co decyduje o stabilności układu liniowego według równań charakterystycznych?",
+                answers: [
+                    "Pierwiastki równania charakterystycznego",
+                    "Transmitancja operatorowa",
+                    "Sygnał zakłócający",
+                    "Zmienna sterowana",
+                    "Regulator P"
+                ],
+                correct: 0
+            },
+            {
+                question: "Kiedy układ jest stabilny asymptotycznie?",
+                answers: [
+                    "Gdy wszystkie pierwiastki mają ujemne części rzeczywiste.",
+                    "Gdy pierwiastki mają dodatnie części rzeczywiste.",
+                    "Gdy jest otwarty układ.",
+                    "Gdy jest element nieliniowy.",
+                    "Gdy jest histereza."
+                ],
+                correct: 0
+            },
+            {
+                question: "Jakie jest podstawowe wymaganie kryterium Hurwitza?",
+                answers: [
+                    "Warunki na współczynniki wielomianu charakterystycznego",
+                    "Obliczanie transformaty Laplace'a",
+                    "Dobór regulatora PD",
+                    "Analiza oscylacji drugiego rzędu",
+                    "Definiowanie uchybu statycznego"
+                ],
+                correct: 0
+            },
+            {
+                question: "Co oznacza uchyb statyczny układu regulacji?",
+                answers: [
+                    "Uchyb w stanie ustalonym.",
+                    "Uchyb dynamiczny.",
+                    "Pochodna uchybu.",
+                    "Całka uchybu.",
+                    "Wzmocnienie krytyczne."
+                ],
+                correct: 0
+            },
+            {
+                question: "Który parametr opisuje jakość dynamiczną układu?",
+                answers: [
+                    "Czas regulacji, przeregulowanie, tłumienie.",
+                    "Tylko wzmocnienie K.",
+                    "Tylko stała czasowa T.",
+                    "Tylko histereza.",
+                    "Tylko symbol s."
+                ],
+                correct: 0
+            },
+            {
+                question: "Jakie są etapy syntezy układów sterowania?",
+                answers: [
+                    "Modelowanie → analiza → dobór regulatora → strojenie.",
+                    "Tylko modelowanie.",
+                    "Tylko analiza stabilności.",
+                    "Tylko obliczanie transformat.",
+                    "Tylko definiowanie sygnałów."
+                ],
+                correct: 0
+            },
+            {
+                question: "Na czym polega klasyczna metoda syntezy sterowania układami liniowymi?",
+                answers: [
+                    "Dobór regulatora na podstawie charakterystyk układu.",
+                    "Wyłącznie metoda Zieglera-Nicholsa.",
+                    "Analiza nieliniowych elementów.",
+                    "Projektowanie sprężyn.",
+                    "Obliczanie indukcyjności."
+                ],
+                correct: 0
+            },
+            {
+                question: "Jaki parametr wyznacza się w drugiej metodzie Zieglera-Nicholsa, doprowadzając układ do granicy stabilności?",
+                answers: [
+                    "Wyznacza się wzmocnienie krytyczne i okres oscylacji.",
+                    "Tylko stałą czasową T.",
+                    "Tylko współczynnik ζ.",
+                    "Tylko uchyb statyczny.",
+                    "Tylko histerezę."
+                ],
+                correct: 0
+            },
+            {
+                question: "Czym jest wzmocnienie krytyczne Kkr w drugiej metodzie Zieglera-Nicholsa?",
+                answers: [
+                    "Największe wzmocnienie, przy którym układ jest na granicy stabilności.",
+                    "Najmniejsze wzmocnienie.",
+                    "Wzmocnienie proporcjonalne.",
+                    "Wzmocnienie całkujące.",
+                    "Wzmocnienie różniczkujące."
+                ],
+                correct: 0
+            }
+        ];
+
+        let currentQuestions = [...questions];
+        let score = 0;
+        let currentQuestion = null;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function loadQuestion() {
+            document.getElementById('summary').style.display = 'none';
+            document.getElementById('feedback').innerText = '';
+            if (currentQuestions.length === 0) {
+                showSummary();
+                return;
+            }
+            shuffle(currentQuestions);
+            currentQuestion = currentQuestions.pop();
+            document.getElementById('question').innerText = currentQuestion.question;
+            const optionsForm = document.getElementById('options');
+            optionsForm.innerHTML = '';
+            currentQuestion.answers.forEach((answer, index) => {
+                const label = String.fromCharCode(97 + index); // a, b, c, d, e
+                optionsForm.innerHTML += `
+                    <div class="option">
+                        <input type="radio" name="answer" id="opt${index}" value="${index}">
+                        <label for="opt${index}">${label}) ${answer}</label>
+                    </div>
+                `;
+            });
+            document.getElementById('submit').disabled = false;
+        }
+
+        function checkAnswer() {
+            const selected = document.querySelector('input[name="answer"]:checked');
+            if (!selected) return;
+            const answerIndex = parseInt(selected.value);
+            const isCorrect = answerIndex === currentQuestion.correct;
+            if (isCorrect) {
+                score++;
+                document.getElementById('feedback').innerText = 'Poprawna odpowiedź!';
+                document.getElementById('feedback').style.color = 'green';
+            } else {
+                document.getElementById('feedback').innerText = `Niepoprawna. Poprawna to ${String.fromCharCode(97 + currentQuestion.correct)}).`;
+                document.getElementById('feedback').style.color = 'red';
+            }
+            document.getElementById('score').innerText = `Punkty: ${score}`;
+            document.getElementById('submit').disabled = true;
+            // Disable all radios to prevent changing
+            const radios = document.querySelectorAll('input[name="answer"]');
+            radios.forEach(radio => radio.disabled = true);
+            setTimeout(loadQuestion, 2000); // Load next after 2 seconds
+        }
+
+        function showSummary() {
+            const total = questions.length;
+            const percentage = (score / total) * 100;
+            const passed = percentage >= 70 ? 'Zaliczone' : 'Niezaliczone';
+            document.getElementById('quiz').style.display = 'none';
+            document.getElementById('summary').innerHTML = `
+                <h2>Podsumowanie</h2>
+                <p>Punkty: ${score} / ${total}</p>
+                <p>Procent: ${percentage.toFixed(2)}%</p>
+                <p>Wynik: ${passed}</p>
+            `;
+            document.getElementById('summary').style.display = 'block';
+        }
+
+        function restart() {
+            currentQuestions = [...questions];
+            score = 0;
+            document.getElementById('score').innerText = `Punkty: ${score}`;
+            document.getElementById('quiz').style.display = 'block';
+            loadQuestion();
+        }
+
+        document.getElementById('submit').addEventListener('click', checkAnswer);
+        document.getElementById('restart').addEventListener('click', restart);
+
+        // Initial load
+        loadQuestion();
+    </script>
+</body>
+</html>

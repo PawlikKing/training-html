@@ -9,302 +9,302 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
         }
         
         body {
-            background: linear-gradient(135deg, #1a2980, #26d0ce);
-            color: #333;
+            background: #f5f5f5;
+            color: #2c3e50;
             min-height: 100vh;
             padding: 20px;
             display: flex;
             flex-direction: column;
             align-items: center;
+            line-height: 1.6;
         }
         
         .container {
-            max-width: 900px;
+            max-width: 800px;
             width: 100%;
-            background-color: rgba(255, 255, 255, 0.95);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-            padding: 30px;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            padding: 40px;
             margin: 20px 0;
-            position: relative;
-            overflow: hidden;
         }
         
         .header {
             text-align: center;
             margin-bottom: 30px;
-            border-bottom: 3px solid #26d0ce;
             padding-bottom: 20px;
+            border-bottom: 1px solid #e0e0e0;
         }
         
         .header h1 {
-            color: #1a2980;
-            font-size: 2.5rem;
-            margin-bottom: 10px;
+            color: #2c3e50;
+            font-size: 1.8rem;
+            margin-bottom: 8px;
+            font-weight: 600;
         }
         
         .header p {
-            color: #555;
-            font-size: 1.1rem;
+            color: #666;
+            font-size: 0.95rem;
         }
         
         .progress-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
-            background-color: #f0f8ff;
-            padding: 15px;
-            border-radius: 10px;
-            border: 1px solid #d1e7ff;
+            margin-bottom: 30px;
+            padding: 12px 0;
+            font-size: 0.9rem;
+            color: #666;
         }
         
         .progress-bar {
             flex-grow: 1;
-            height: 12px;
-            background-color: #e0e0e0;
-            border-radius: 6px;
-            margin: 0 15px;
+            height: 6px;
+            background-color: #e9ecef;
+            border-radius: 3px;
+            margin: 0 20px;
             overflow: hidden;
         }
         
         .progress-fill {
             height: 100%;
-            background: linear-gradient(to right, #1a2980, #26d0ce);
+            background: #4a90e2;
             width: 0%;
-            transition: width 0.5s ease;
+            transition: width 0.3s ease;
         }
         
-        .question-counter {
-            font-weight: bold;
-            color: #1a2980;
-            white-space: nowrap;
-        }
-        
-        .score-display {
-            font-weight: bold;
-            color: #1a2980;
-            white-space: nowrap;
+        .question-counter, .score-display {
+            font-weight: 500;
+            color: #2c3e50;
         }
         
         .question-box {
-            background-color: #f8fdff;
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 25px;
-            border-left: 5px solid #1a2980;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-bottom: 30px;
         }
         
         .question-text {
-            font-size: 1.3rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin-bottom: 24px;
+            color: #2c3e50;
+            line-height: 1.6;
+        }
+        
+        .question-number {
+            color: #4a90e2;
             font-weight: 600;
-            margin-bottom: 20px;
-            color: #1a2980;
-            line-height: 1.5;
         }
         
         .answers-container {
-            display: grid;
-            grid-template-columns: 1fr;
+            display: flex;
+            flex-direction: column;
             gap: 12px;
         }
         
-        @media (min-width: 768px) {
-            .answers-container {
-                grid-template-columns: 1fr 1fr;
-            }
-        }
-        
         .answer-option {
-            background-color: white;
-            border: 2px solid #d1e7ff;
-            border-radius: 10px;
-            padding: 15px;
+            background-color: #fafafa;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            padding: 16px;
             cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1rem;
+            transition: all 0.2s;
+            font-size: 0.95rem;
             display: flex;
-            align-items: center;
+            align-items: flex-start;
         }
         
-        .answer-option:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
-            border-color: #1a2980;
+        .answer-option:hover:not(.disabled) {
+            background-color: #f0f0f0;
+            border-color: #4a90e2;
         }
         
         .answer-option.selected {
-            background-color: #e6f7ff;
-            border-color: #1a2980;
-            font-weight: 600;
+            background-color: #e3f2fd;
+            border-color: #4a90e2;
         }
         
         .answer-option.correct {
-            background-color: #e7f7e7;
-            border-color: #28a745;
+            background-color: #e8f5e9;
+            border-color: #4caf50;
         }
         
         .answer-option.incorrect {
-            background-color: #fdeaea;
-            border-color: #dc3545;
+            background-color: #ffebee;
+            border-color: #f44336;
+        }
+        
+        .answer-option.disabled {
+            cursor: not-allowed;
         }
         
         .answer-letter {
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-            background-color: #1a2980;
-            color: white;
-            border-radius: 50%;
-            text-align: center;
-            line-height: 30px;
-            margin-right: 15px;
-            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 28px;
+            height: 28px;
+            background-color: #e0e0e0;
+            color: #666;
+            border-radius: 4px;
+            margin-right: 12px;
+            font-weight: 600;
+            font-size: 0.85rem;
             flex-shrink: 0;
         }
         
+        .answer-option.selected .answer-letter {
+            background-color: #4a90e2;
+            color: white;
+        }
+        
         .answer-option.correct .answer-letter {
-            background-color: #28a745;
+            background-color: #4caf50;
+            color: white;
         }
         
         .answer-option.incorrect .answer-letter {
-            background-color: #dc3545;
+            background-color: #f44336;
+            color: white;
+        }
+        
+        .answer-text {
+            flex: 1;
+            line-height: 1.5;
         }
         
         .feedback {
             margin-top: 20px;
-            padding: 15px;
-            border-radius: 10px;
-            font-weight: 600;
+            padding: 12px 16px;
+            border-radius: 6px;
+            font-size: 0.95rem;
             display: none;
         }
         
         .feedback.correct {
-            background-color: #e7f7e7;
-            color: #28a745;
-            border: 1px solid #28a745;
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            border: 1px solid #4caf50;
         }
         
         .feedback.incorrect {
-            background-color: #fdeaea;
-            color: #dc3545;
-            border: 1px solid #dc3545;
+            background-color: #ffebee;
+            color: #c62828;
+            border: 1px solid #f44336;
         }
         
         .buttons-container {
             display: flex;
             justify-content: space-between;
-            margin-top: 25px;
+            margin-top: 30px;
+            gap: 12px;
         }
         
         button {
-            padding: 14px 30px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
+            border-radius: 6px;
+            font-size: 0.95rem;
+            font-weight: 500;
             cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            transition: all 0.2s;
         }
         
         button:disabled {
-            opacity: 0.6;
+            opacity: 0.5;
             cursor: not-allowed;
         }
         
         .next-btn {
-            background: linear-gradient(to right, #1a2980, #26d0ce);
+            background: #4a90e2;
             color: white;
             margin-left: auto;
         }
         
         .next-btn:hover:not(:disabled) {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 15px rgba(26, 41, 128, 0.3);
+            background: #357abd;
         }
         
         .restart-btn {
-            background-color: #f8f9fa;
-            color: #1a2980;
-            border: 2px solid #1a2980;
+            background-color: white;
+            color: #666;
+            border: 1px solid #e0e0e0;
         }
         
         .restart-btn:hover {
-            background-color: #1a2980;
-            color: white;
+            background-color: #f5f5f5;
         }
         
         .summary-container {
             text-align: center;
-            padding: 30px;
+            padding: 20px;
             display: none;
         }
         
         .summary-container h2 {
-            color: #1a2980;
-            margin-bottom: 20px;
-            font-size: 2.2rem;
+            color: #2c3e50;
+            margin-bottom: 30px;
+            font-size: 1.6rem;
+            font-weight: 600;
         }
         
         .score-circle {
-            width: 180px;
-            height: 180px;
+            width: 160px;
+            height: 160px;
             border-radius: 50%;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             margin: 0 auto 30px;
-            font-weight: bold;
-            background: linear-gradient(135deg, #1a2980, #26d0ce);
-            color: white;
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+            font-weight: 600;
+            background: #f5f5f5;
+            color: #2c3e50;
+            border: 3px solid #4a90e2;
         }
         
         .score-value {
-            font-size: 3.5rem;
+            font-size: 3rem;
             line-height: 1;
         }
         
         .score-percentage {
-            font-size: 1.5rem;
+            font-size: 1.2rem;
+            color: #666;
+            margin-top: 4px;
         }
         
         .passed {
-            color: #28a745;
-            font-size: 1.8rem;
-            font-weight: bold;
+            color: #4caf50;
+            font-size: 1.3rem;
+            font-weight: 600;
             margin: 20px 0;
         }
         
         .failed {
-            color: #dc3545;
-            font-size: 1.8rem;
-            font-weight: bold;
+            color: #f44336;
+            font-size: 1.3rem;
+            font-weight: 600;
             margin: 20px 0;
         }
         
         .summary-details {
-            background-color: #f8fdff;
-            border-radius: 15px;
+            background-color: #fafafa;
+            border-radius: 6px;
             padding: 20px;
-            margin-top: 20px;
+            margin-top: 30px;
             text-align: left;
         }
         
         .summary-details h3 {
-            color: #1a2980;
-            margin-bottom: 15px;
-            border-bottom: 2px solid #26d0ce;
-            padding-bottom: 10px;
+            color: #2c3e50;
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+            font-weight: 600;
         }
         
         .summary-list {
@@ -312,10 +312,9 @@
         }
         
         .summary-list li {
-            padding: 10px 0;
+            padding: 12px 0;
             border-bottom: 1px solid #e0e0e0;
-            display: flex;
-            justify-content: space-between;
+            font-size: 0.9rem;
         }
         
         .summary-list li:last-child {
@@ -323,78 +322,73 @@
         }
         
         .correct-answer {
-            color: #28a745;
-            font-weight: bold;
+            color: #4caf50;
+            font-weight: 600;
         }
         
         .incorrect-answer {
-            color: #dc3545;
-            font-weight: bold;
+            color: #f44336;
+            font-weight: 600;
         }
         
         .footer {
             text-align: center;
-            color: white;
+            color: #999;
             margin-top: 20px;
-            font-size: 0.9rem;
-            opacity: 0.8;
+            font-size: 0.85rem;
         }
         
         .start-screen {
             text-align: center;
-            padding: 40px 20px;
+            padding: 20px;
         }
         
         .start-screen h2 {
-            color: #1a2980;
-            margin-bottom: 20px;
+            color: #2c3e50;
+            margin-bottom: 16px;
+            font-size: 1.4rem;
+            font-weight: 600;
         }
         
         .start-btn {
-            background: linear-gradient(to right, #1a2980, #26d0ce);
+            background: #4a90e2;
             color: white;
-            padding: 18px 50px;
-            font-size: 1.2rem;
+            padding: 14px 32px;
+            font-size: 1rem;
             margin-top: 30px;
+        }
+        
+        .start-btn:hover {
+            background: #357abd;
         }
         
         .instructions {
-            background-color: #f8fdff;
-            border-radius: 15px;
-            padding: 25px;
-            margin-top: 30px;
+            background-color: #fafafa;
+            border-radius: 6px;
+            padding: 24px;
+            margin-top: 24px;
             text-align: left;
-            max-width: 700px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
         
         .instructions h3 {
-            color: #1a2980;
-            margin-bottom: 15px;
-            text-align: center;
+            color: #2c3e50;
+            margin-bottom: 16px;
+            font-size: 1.1rem;
+            font-weight: 600;
         }
         
         .instructions ul {
-            padding-left: 20px;
-            margin-bottom: 20px;
+            padding-left: 24px;
+            margin-bottom: 16px;
         }
         
         .instructions li {
-            margin-bottom: 10px;
-            line-height: 1.5;
-        }
-        
-        .question-number {
-            color: #26d0ce;
-            font-weight: bold;
-        }
-        
-        .math-equation {
-            font-family: 'Cambria Math', serif;
-            font-size: 1.2rem;
-            padding: 10px;
-            background-color: #f8f9fa;
-            border-radius: 5px;
-            margin: 5px 0;
+            margin-bottom: 8px;
+            line-height: 1.6;
+            font-size: 0.95rem;
         }
     </style>
 </head>
@@ -402,7 +396,7 @@
     <div class="container">
         <div class="header">
             <h1>Test z Automatyzacji Procesów</h1>
-            <p>Kompletny test zawierający WSZYSTKIE pytania z pliku PDF</p>
+            <p>Kompletny test - wszystkie 32 pytania</p>
         </div>
         
         <div class="progress-container">
@@ -421,19 +415,8 @@
             </div>
             
             <div class="buttons-container">
-                <button class="restart-btn" id="restart-btn" onclick="restartTest()">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 8px;">
-                        <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
-                        <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
-                    </svg>
-                    Restart
-                </button>
-                <button class="next-btn" id="next-btn" onclick="nextQuestion()" disabled>
-                    Przejdź dalej
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" style="margin-left: 8px;">
-                        <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-                    </svg>
-                </button>
+                <button class="restart-btn" id="restart-btn">Restart</button>
+                <button class="next-btn" id="next-btn" disabled>Przejdź dalej</button>
             </div>
         </div>
         
@@ -450,50 +433,36 @@
                 <ul class="summary-list" id="answers-summary"></ul>
             </div>
             
-            <button class="restart-btn" onclick="restartTest()" style="margin-top: 30px;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" style="margin-right: 8px;">
-                    <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
-                    <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
-                </svg>
-                Rozpocznij nowy test
-            </button>
+            <button class="restart-btn" id="restart-summary-btn" style="margin-top: 30px;">Rozpocznij nowy test</button>
         </div>
         
         <div id="start-screen" class="start-screen">
-            <h2>Kompletny test z Automatyzacji Procesów</h2>
-            <p>Test zawiera <strong>wszystkie 32 pytania</strong> z pliku PDF, łącznie z pytaniami obrazkowymi przedstawionymi w formie tekstowej.</p>
+            <h2>Gotowy na sprawdzenie wiedzy?</h2>
+            <p>Test zawiera <strong>wszystkie 32 pytania</strong> z automatyzacji procesów</p>
             
             <div class="instructions">
-                <h3>Instrukcja:</h3>
+                <h3>Instrukcja</h3>
                 <ul>
                     <li>Test zawiera <strong>wszystkie 32 pytania</strong> z pliku PDF</li>
-                    <li>Odpowiedzi w każdym pytaniu są losowo mieszane</li>
-                    <li>Po wybraniu odpowiedzi zobaczysz, czy była poprawna</li>
+                    <li>Odpowiedzi są losowo mieszane w każdym pytaniu</li>
+                    <li>Po wybraniu odpowiedzi zobaczysz czy była poprawna</li>
                     <li>Za każdą poprawną odpowiedź otrzymasz 1 punkt</li>
-                    <li>Aby zaliczyć test, musisz zdobyć co najmniej <strong>70% punktów</strong> (co najmniej 23/32)</li>
-                    <li>W każdej chwili możesz zrestartować test</li>
+                    <li>Do zaliczenia potrzeba <strong>70%</strong> (23/32 punkty)</li>
+                    <li>Możesz zrestartować test w dowolnym momencie</li>
                 </ul>
-                <p style="text-align: center; font-weight: bold; color: #1a2980;">Powodzenia!</p>
+                <p style="text-align: center; font-weight: 600; color: #4a90e2;">Powodzenia!</p>
             </div>
             
-            <button class="start-btn" onclick="startTest()">
-                Rozpocznij test
-                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 16 16" style="margin-left: 8px;">
-                    <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/>
-                </svg>
-            </button>
+            <button class="start-btn" id="start-btn">Rozpocznij test</button>
         </div>
     </div>
     
     <div class="footer">
-        <p>Test zawiera wszystkie 32 pytania z pliku "Test automatyzacja procesów.pdf"</p>
-        <p>© 2023 - Kompletny Test z Automatyzacji Procesów</p>
+        <p>Test z automatyzacji procesów • 32 pytania</p>
     </div>
 
     <script>
-        // KOMPLETNE dane pytań z pliku PDF (wszystkie 32 pytania)
         const allQuestions = [
-            // Pojęcia podstawowe i zadania automatyki (6 pytań)
             {
                 category: "Pojęcia podstawowe i zadania automatyki",
                 question: "1. Czym zajmuje się automatyka?",
@@ -560,7 +529,6 @@
                 ],
                 correct: 0
             },
-            // Transformacja Laplace'a (5 pytań)
             {
                 category: "Transformacja Laplace'a",
                 question: "1. Do czego służy transformata Laplace'a?",
@@ -576,10 +544,10 @@
                 category: "Transformacja Laplace'a",
                 question: "2. Jak definiuje się transformatę Laplace'a funkcji f(t)?",
                 answers: [
-                    "\[\mathcal{L}\{f(t)\} = \int_{0}^{\infty}f(t)e^{-st}dt\]",
-                    "\[\mathcal{L}\{f(t)\} = \int_{-\infty}^{\infty}f(t)e^{-st}dt\]",
-                    "\[\mathcal{L}\{f(t)\} = \sum_{n=0}^{\infty}f(nT)e^{-snT}\]",
-                    "\[\mathcal{L}\{f(t)\} = \frac{1}{2\pi j}\int_{c-j\infty}^{c+j\infty}F(s)e^{st}ds\]"
+                    "Całka od 0 do nieskończoności z f(t)·e^(-st)dt",
+                    "Całka od minus do plus nieskończoności z f(t)·e^(-st)dt",
+                    "Suma od n=0 do nieskończoności z f(nT)·e^(-snT)",
+                    "1/(2πj) razy całka z F(s)·e^(st)ds"
                 ],
                 correct: 0
             },
@@ -598,10 +566,10 @@
                 category: "Transformacja Laplace'a",
                 question: "4. Jaka jest transformata Laplace'a skoku jednostkowego funkcji 1(t)?",
                 answers: [
-                    "\[\mathcal{L}\{1(t)\} = \frac{1}{s}\]",
-                    "\[\mathcal{L}\{1(t)\} = 1\]",
-                    "\[\mathcal{L}\{1(t)\} = \frac{1}{s^2}\]",
-                    "\[\mathcal{L}\{1(t)\} = e^{-s}\]"
+                    "L{1(t)} = 1/s",
+                    "L{1(t)} = 1",
+                    "L{1(t)} = 1/s²",
+                    "L{1(t)} = e^(-s)"
                 ],
                 correct: 0
             },
@@ -609,14 +577,13 @@
                 category: "Transformacja Laplace'a",
                 question: "5. Transformata Laplace'a pierwszej pochodnej funkcji f(t) ma postać:",
                 answers: [
-                    "\[\mathcal{L}\{f^{\prime}(t)\} = sF(s) - f(0)\]",
-                    "\[\mathcal{L}\{f^{\prime}(t)\} = sF(s)\]",
-                    "\[\mathcal{L}\{f^{\prime}(t)\} = F(s) - f(0)\]",
-                    "\[\mathcal{L}\{f^{\prime}(t)\} = \frac{F(s)}{s} - f(0)\]"
+                    "L{f'(t)} = sF(s) - f(0)",
+                    "L{f'(t)} = sF(s)",
+                    "L{f'(t)} = F(s) - f(0)",
+                    "L{f'(t)} = F(s)/s - f(0)"
                 ],
                 correct: 0
             },
-            // Modelowanie układów automatyki (6 pytań)
             {
                 category: "Modelowanie układów automatyki",
                 question: "1. Co jest celem modelowania matematycznego układów dynamicznych?",
@@ -654,16 +621,16 @@
                 category: "Modelowanie układów automatyki",
                 question: "4. Jakie równanie opisuje zależność siły w sprężynie od deformacji?",
                 answers: [
-                    "\[F = kx\] (Równanie sprężyny)",
-                    "\[F = c \cdot \frac{dy}{dt}\]",
-                    "\[F = m \cdot \frac{d^2x}{dt^2}\]",
-                    "\[F = \frac{k}{x}\]"
+                    "F = kx (Równanie sprężyny)",
+                    "F = c · dy/dt",
+                    "F = m · d²x/dt²",
+                    "F = k/x"
                 ],
                 correct: 0
             },
             {
                 category: "Modelowanie układów automatyki",
-                question: "5. Jaki element mechaniczny opisuje równanie F = c*(dy/dt)?",
+                question: "5. Jaki element mechaniczny opisuje równanie F = c·(dy/dt)?",
                 answers: [
                     "Tłumik lepki",
                     "Sprężyna",
@@ -683,7 +650,6 @@
                 ],
                 correct: 0
             },
-            // Właściwości dynamiczne elementów automatyki (6 pytań)
             {
                 category: "Właściwości dynamiczne elementów automatyki",
                 question: "1. Co jest celem modelowania matematycznego układów dynamicznych?",
@@ -699,10 +665,10 @@
                 category: "Właściwości dynamiczne elementów automatyki",
                 question: "2. Jaka jest ogólna postać transmitancji elementu proporcjonalnego?",
                 answers: [
-                    "\[G(s) = K\]",
-                    "\[G(s) = \frac{K}{s}\]",
-                    "\[G(s) = \frac{K}{Ts + 1}\]",
-                    "\[G(s) = K \cdot s\]"
+                    "G(s) = K",
+                    "G(s) = K/s",
+                    "G(s) = K/(Ts + 1)",
+                    "G(s) = K · s"
                 ],
                 correct: 0
             },
@@ -710,10 +676,10 @@
                 category: "Właściwości dynamiczne elementów automatyki",
                 question: "3. Jaka jest ogólna postać transmitancji elementu całkującego?",
                 answers: [
-                    "\[G(s) = \frac{K}{s}\]",
-                    "\[G(s) = K\]",
-                    "\[G(s) = \frac{K}{Ts + 1}\]",
-                    "\[G(s) = K \cdot s\]"
+                    "G(s) = K/s",
+                    "G(s) = K",
+                    "G(s) = K/(Ts + 1)",
+                    "G(s) = K · s"
                 ],
                 correct: 0
             },
@@ -721,10 +687,10 @@
                 category: "Właściwości dynamiczne elementów automatyki",
                 question: "4. Jaka jest ogólna postać transmitancji elementu inercyjnego pierwszego rzędu?",
                 answers: [
-                    "\[G(s) = \frac{K}{Ts + 1}\]",
-                    "\[G(s) = K\]",
-                    "\[G(s) = \frac{K}{s}\]",
-                    "\[G(s) = \frac{K}{T^2s^2 + 2\xi Ts + 1}\]"
+                    "G(s) = K/(Ts + 1)",
+                    "G(s) = K",
+                    "G(s) = K/s",
+                    "G(s) = K/(T²s² + 2ξTs + 1)"
                 ],
                 correct: 0
             },
@@ -732,10 +698,10 @@
                 category: "Właściwości dynamiczne elementów automatyki",
                 question: "5. Jaka jest ogólna postać transmitancji elementu oscylacyjnego drugiego rzędu?",
                 answers: [
-                    "\[G(s) = \frac{K}{T^2s^2 + 2\xi Ts + 1}\]",
-                    "\[G(s) = \frac{K}{Ts + 1}\]",
-                    "\[G(s) = \frac{K}{s}\]",
-                    "\[G(s) = K\]"
+                    "G(s) = K/(T²s² + 2ξTs + 1)",
+                    "G(s) = K/(Ts + 1)",
+                    "G(s) = K/s",
+                    "G(s) = K"
                 ],
                 correct: 0
             },
@@ -750,7 +716,6 @@
                 ],
                 correct: 0
             },
-            // Liniowe układy regulacji (6 pytań)
             {
                 category: "Liniowe układy regulacji",
                 question: "1. Jaki jest podstawy cel układu regulacji stałowartościowej?",
@@ -777,10 +742,10 @@
                 category: "Liniowe układy regulacji",
                 question: "3. Jakim równaniem opisany jest regulator proporcjonalny (P)?",
                 answers: [
-                    "\[u(t) = K_{p}e(t)\]",
-                    "\[u(t) = K_{p}e(t) + K_{i}\int e(t)dt\]",
-                    "\[u(t) = K_{p}e(t) + K_{d}\frac{de(t)}{dt}\]",
-                    "\[u(t) = K_{i}\int e(t)dt\]"
+                    "u(t) = Kp·e(t)",
+                    "u(t) = Kp·e(t) + Ki·∫e(t)dt",
+                    "u(t) = Kp·e(t) + Kd·de(t)/dt",
+                    "u(t) = Ki·∫e(t)dt"
                 ],
                 correct: 0
             },
@@ -788,10 +753,10 @@
                 category: "Liniowe układy regulacji",
                 question: "4. Jakim równaniem opisany jest regulator proporcjonalno-różniczkujący (PD)?",
                 answers: [
-                    "\[u(t) = K_{p}e(t) + K_{d}\frac{de(t)}{dt}\]",
-                    "\[u(t) = K_{p}e(t)\]",
-                    "\[u(t) = K_{p}e(t) + K_{i}\int e(t)dt\]",
-                    "\[u(t) = K_{d}\frac{de(t)}{dt}\]"
+                    "u(t) = Kp·e(t) + Kd·de(t)/dt",
+                    "u(t) = Kp·e(t)",
+                    "u(t) = Kp·e(t) + Ki·∫e(t)dt",
+                    "u(t) = Kd·de(t)/dt"
                 ],
                 correct: 0
             },
@@ -817,7 +782,6 @@
                 ],
                 correct: 0
             },
-            // Stabilność układów sterowania (6 pytań)
             {
                 category: "Stabilność układów sterowania",
                 question: "1. Co oznacza stabilność układu automatycznej regulacji?",
@@ -840,359 +804,227 @@
                 ],
                 correct: 0
             },
-            {
-                category: "Stabilność układów sterowania",
-                question: "3. Kiedy układ jest stabilny asymptotycznie?",
-                answers: [
-                    "Gdy wszystkie pierwiastki mają ujemne części rzeczywiste.",
-                    "Gdy wszystkie pierwiastki mają dodatnie części rzeczywiste.",
-                    "Gdy wszystkie pierwiastki mają zerowe części rzeczywiste.",
-                    "Gdy wszystkie pierwiastki są rzeczywiste."
-                ],
-                correct: 0
-            },
-            {
-                category: "Stabilność układów sterowania",
-                question: "4. Jakie jest podstawowe wymaganie kryterium Hurwitza?",
-                answers: [
-                    "Warunki na współczynniki wielomianu charakterystycznego",
-                    "Obliczenie pierwiastków równania charakterystycznego",
-                    "Analiza odpowiedzi skokowej układu",
-                    "Wyznaczenie charakterystyki amplitudowo-fazowej"
-                ],
-                correct: 0
-            },
-            {
-                category: "Stabilność układów sterowania",
-                question: "5. Co oznacza uchyb statyczny układu regulacji?",
-                answers: [
-                    "Uchyb w stanie ustalonym.",
-                    "Uchyb w stanie nieustalonym.",
-                    "Maksymalny uchyb w trakcie regulacji.",
-                    "Uchyb w chwili początkowej."
-                ],
-                correct: 0
-            },
-            {
-                category: "Stabilność układów sterowania",
-                question: "6. Który parametr opisuje jakość dynamiczną układu?",
-                answers: [
-                    "Czas regulacji, przeregulowanie, tłumienie.",
-                    "Wzmocnienie, stała czasowa, częstotliwość.",
-                    "Napięcie, prąd, moc.",
-                    "Temperatura, ciśnienie, przepływ."
-                ],
-                correct: 0
-            },
-            // Synteza układów liniowych sterowania automatycznego (3 pytania)
-            {
-                category: "Synteza układów liniowych sterowania automatycznego",
-                question: "1. Jakie są etapy syntezy układów sterowania?",
-                answers: [
-                    "Modelowanie → analiza → dobór regulatora → strojenie.",
-                    "Analiza → modelowanie → strojenie → implementacja.",
-                    "Dobór regulatora → analiza → modelowanie → strojenie.",
-                    "Strojenie → implementacja → testowanie → analiza."
-                ],
-                correct: 0
-            },
-            {
-                category: "Synteza układów liniowych sterowania automatycznego",
-                question: "2. Na czym polega klasyczna metoda syntezy sterowania układami liniowymi?",
-                answers: [
-                    "Dobór regulatora na podstawie charakterystyk układu.",
-                    "Optymalizacja parametrów regulatora za pomocą algorytmów genetycznych.",
-                    "Projektowanie regulatora adaptacyjnego.",
-                    "Dobór regulatora na podstawie symulacji komputerowej."
-                ],
-                correct: 0
-            },
-            {
-                category: "Synteza układów liniowych sterowania automatycznego",
-                question: "3. Jaki parametr wyznacza się w drugiej metodzie Zieglera-Nicholsa, doprowadzając układ do granicy stabilności?",
-                answers: [
-                    "Wyznacza się wzmocnienie krytyczne i okres oscylacji.",
-                    "Wyznacza się czas narastania i przeregulowanie.",
-                    "Wyznacza się uchyb statyczny i dynamiczny.",
-                    "Wyznacza się charakterystykę amplitudowo-fazową."
-                ],
-                correct: 0
-            },
-            {
-                category: "Synteza układów liniowych sterowania automatycznego",
-                question: "4. Czym jest wzmocnienie krytyczne K<sub>kr</sub> w drugiej metodzie Zieglera-Nicholsa?",
-                answers: [
-                    "Największe wzmocnienie, przy którym układ jest na granicy stabilności.",
-                    "Najmniejsze wzmocnienie zapewniające stabilność układu.",
-                    "Wzmocnienie zapewniające zerowy uchyb statyczny.",
-                    "Wzmocnienie optymalne ze względu na kryterium jakości."
-                ],
-                correct: 0
-            }
-        ];
+{
+    category: "Synteza układów liniowych sterowania automatycznego",
+    question: "1. Jakie są etapy syntezy układów sterowania?",
+    answers: [
+      "Modelowanie → analiza → dobór regulatora → strojenie",
+      "Analiza → modelowanie → strojenie → implementacja",
+      "Dobór regulatora → analiza → modelowanie → strojenie",
+      "Strojenie → implementacja → testowanie → analiza"
+    ],
+    correct: 0
+  },
+  {
+    category: "Synteza układów liniowych sterowania automatycznego",
+    question: "2. Na czym polega klasyczna metoda syntezy sterowania układami liniowymi?",
+    answers: [
+      "Dobór regulatora na podstawie charakterystyk układu",
+      "Optymalizacja parametrów regulatora za pomocą algorytmów genetycznych",
+      "Projektowanie regulatora adaptacyjnego",
+      "Dobór regulatora na podstawie symulacji komputerowej"
+    ],
+    correct: 0
+  },
+  {
+    category: "Synteza układów liniowych sterowania automatycznego",
+    question: "3. Jaki parametr wyznacza się w drugiej metodzie Zieglera-Nicholsa?",
+    answers: [
+      "Wzmocnienie krytyczne Ku i okres oscylacji Tu",
+      "Czas narastania i przeregulowanie",
+      "Uchyb statyczny i dynamiczny",
+      "Charakterystykę amplitudowo-fazową"
+    ],
+    correct: 0
+  }
+  // Możesz dodać 4. pytanie o Kkr jeśli chcesz dobić dokładnie do 32
+];
 
-        // Zmienne stanu testu
-        let currentQuestions = [];
-        let currentQuestionIndex = 0;
-        let score = 0;
-        let selectedAnswer = null;
-        let answerSubmitted = false;
-        const totalQuestionsInTest = 32; // Wszystkie pytania
-        let userAnswers = [];
+// ================================================
+//    LOGIKA TESTU – poprawiona wersja
+// ================================================
 
-        // Funkcja rozpoczynająca test
-        function startTest() {
-            // Używamy WSZYSTKICH pytań
-            currentQuestions = [...allQuestions];
-            
-            // Resetowanie stanu
-            currentQuestionIndex = 0;
-            score = 0;
-            selectedAnswer = null;
-            answerSubmitted = false;
-            userAnswers = [];
-            
-            // Ukrycie ekranu startowego, pokazanie pytania
-            document.getElementById('start-screen').style.display = 'none';
-            document.getElementById('question-container').style.display = 'block';
-            document.getElementById('summary-container').style.display = 'none';
-            
-            // Aktualizacja licznika pytań i wyniku
-            updateProgress();
-            
-            // Wyświetlenie pierwszego pytania
-            showQuestion();
-        }
+let questions = [];               // aktualna, przetasowana lista pytań
+let currentIndex = 0;
+let score = 0;
+let userAnswers = [];             // {qIndex, selectedOriginal, correct}
+let selected = null;              // aktualnie wybrana odpowiedź (index po przetasowaniu)
 
-        // Funkcja wyświetlająca bieżące pytanie
-        function showQuestion() {
-            const question = currentQuestions[currentQuestionIndex];
-            const questionText = document.getElementById('question-text');
-            const answersContainer = document.getElementById('answers-container');
-            
-            // Ustawienie tekstu pytania
-            questionText.innerHTML = `
-                <div style="color: #26d0ce; font-size: 0.9rem; margin-bottom: 5px;">
-                    ${question.category}
-                </div>
-                <div>
-                    <span class="question-number">Pytanie ${currentQuestionIndex + 1}:</span> ${question.question}
-                </div>
-            `;
-            
-            // Przygotowanie odpowiedzi (mieszanie)
-            const shuffledAnswers = [...question.answers]
-                .map((answer, index) => ({ answer, originalIndex: index }))
-                .sort(() => Math.random() - 0.5);
-            
-            // Wyświetlenie odpowiedzi
-            answersContainer.innerHTML = '';
-            shuffledAnswers.forEach((item, index) => {
-                const answerElement = document.createElement('div');
-                answerElement.className = 'answer-option';
-                answerElement.innerHTML = `
-                    <div class="answer-letter">${String.fromCharCode(65 + index)}</div>
-                    <div class="answer-text">${item.answer}</div>
-                `;
-                
-                answerElement.addEventListener('click', () => selectAnswer(index, item.originalIndex));
-                answersContainer.appendChild(answerElement);
-            });
-            
-            // Resetowanie przycisku i zaznaczenia
-            document.getElementById('next-btn').disabled = true;
-            document.getElementById('next-btn').textContent = currentQuestionIndex < currentQuestions.length - 1 ? "Przejdź dalej" : "Zakończ test";
-            selectedAnswer = null;
-            answerSubmitted = false;
-            
-            // Ukrycie feedbacku
-            document.getElementById('feedback').style.display = 'none';
-            document.getElementById('feedback').className = 'feedback';
-            
-            // Aktualizacja postępu
-            updateProgress();
-        }
+const questionTextEl = document.getElementById('question-text');
+const answersContainer = document.getElementById('answers-container');
+const feedbackEl = document.getElementById('feedback');
+const nextBtn = document.getElementById('next-btn');
+const scoreEl = document.getElementById('current-score');
+const progressFill = document.getElementById('progress-fill');
+const currentQEl = document.getElementById('current-question');
+const totalQEl = document.getElementById('total-questions');
 
-        // Funkcja zaznaczania odpowiedzi
-        function selectAnswer(selectedIndex, originalIndex) {
-            if (answerSubmitted) return;
-            
-            // Usunięcie poprzedniego zaznaczenia
-            const allOptions = document.querySelectorAll('.answer-option');
-            allOptions.forEach(option => option.classList.remove('selected'));
-            
-            // Zaznaczenie nowej odpowiedzi
-            allOptions[selectedIndex].classList.add('selected');
-            selectedAnswer = { selectedIndex, originalIndex };
-            
-            // Aktywacja przycisku "Przejdź dalej"
-            document.getElementById('next-btn').disabled = false;
-        }
+function initTest() {
+  questions = [...allQuestions].sort(() => Math.random() - 0.5);
+  currentIndex = 0;
+  score = 0;
+  userAnswers = [];
+  selected = null;
+  
+  document.getElementById('start-screen').style.display = 'none';
+  document.getElementById('question-container').style.display = 'block';
+  document.getElementById('summary-container').style.display = 'none';
+  
+  totalQEl.textContent = questions.length;
+  showQuestion();
+}
 
-        // Funkcja przejścia do następnego pytania
-        function nextQuestion() {
-            if (!answerSubmitted) {
-                // Sprawdzenie odpowiedzi
-                checkAnswer();
-                return;
-            }
-            
-            // Przechowanie odpowiedzi użytkownika
-            userAnswers.push({
-                question: currentQuestions[currentQuestionIndex].question,
-                userAnswer: selectedAnswer.originalIndex,
-                correctAnswer: currentQuestions[currentQuestionIndex].correct,
-                isCorrect: selectedAnswer.originalIndex === currentQuestions[currentQuestionIndex].correct
-            });
-            
-            // Przejście do następnego pytania lub podsumowania
-            currentQuestionIndex++;
-            
-            if (currentQuestionIndex < currentQuestions.length) {
-                showQuestion();
-            } else {
-                showSummary();
-            }
-        }
+function showQuestion() {
+  const q = questions[currentIndex];
+  questionTextEl.innerHTML = `
+    <div style="color:#4a90e2; font-size:0.9rem; margin-bottom:8px;">
+      ${q.category}
+    </div>
+    <span class="question-number">Pytanie ${currentIndex+1}:</span> ${q.question}
+  `;
 
-        // Funkcja sprawdzająca odpowiedź
-        function checkAnswer() {
-            if (selectedAnswer === null) return;
-            
-            const question = currentQuestions[currentQuestionIndex];
-            const isCorrect = selectedAnswer.originalIndex === question.correct;
-            const feedback = document.getElementById('feedback');
-            const allOptions = document.querySelectorAll('.answer-option');
-            
-            // Zaznaczenie poprawnej i błędnej odpowiedzi
-            allOptions.forEach((option, index) => {
-                const optionOriginalIndex = getOriginalIndex(index);
-                if (optionOriginalIndex === question.correct) {
-                    option.classList.add('correct');
-                } else if (index === selectedAnswer.selectedIndex && !isCorrect) {
-                    option.classList.add('incorrect');
-                }
-            });
-            
-            // Wyświetlenie feedbacku
-            if (isCorrect) {
-                feedback.textContent = "✓ Poprawna odpowiedź! Zdobywasz 1 punkt.";
-                feedback.className = 'feedback correct';
-                score++;
-            } else {
-                const correctAnswerLetter = String.fromCharCode(65 + getCorrectAnswerIndex());
-                feedback.textContent = `✗ Niepoprawna odpowiedź. Poprawna odpowiedź to: ${correctAnswerLetter}`;
-                feedback.className = 'feedback incorrect';
-            }
-            
-            feedback.style.display = 'block';
-            answerSubmitted = true;
-            
-            // Aktualizacja wyniku
-            document.getElementById('current-score').textContent = score;
-            
-            // Zmiana tekstu przycisku
-            document.getElementById('next-btn').textContent = currentQuestionIndex < currentQuestions.length - 1 ? "Następne pytanie" : "Zobacz wynik";
-        }
+  // Tasujemy odpowiedzi
+  const shuffled = [...q.answers]
+    .map((text, originalIndex) => ({text, originalIndex}))
+    .sort(() => Math.random() - 0.5);
 
-        // Pomocnicza funkcja do znalezienia oryginalnego indeksu odpowiedzi
-        function getOriginalIndex(shuffledIndex) {
-            const question = currentQuestions[currentQuestionIndex];
-            const answerElements = document.querySelectorAll('.answer-option .answer-text');
-            const answerText = answerElements[shuffledIndex].textContent;
-            
-            return question.answers.findIndex(answer => answer === answerText);
-        }
+  answersContainer.innerHTML = '';
+  shuffled.forEach(({text, originalIndex}, i) => {
+    const div = document.createElement('div');
+    div.className = 'answer-option';
+    div.innerHTML = `
+      <div class="answer-letter">${String.fromCharCode(65+i)}</div>
+      <div class="answer-text">${text}</div>
+    `;
+    div.dataset.original = originalIndex;
+    div.addEventListener('click', () => selectAnswer(i, originalIndex, div));
+    answersContainer.appendChild(div);
+  });
 
-        // Pomocnicza funkcja do znalezienia indeksu poprawnej odpowiedzi
-        function getCorrectAnswerIndex() {
-            const question = currentQuestions[currentQuestionIndex];
-            const answerElements = document.querySelectorAll('.answer-option .answer-text');
-            
-            for (let i = 0; i < answerElements.length; i++) {
-                const answerText = answerElements[i].textContent;
-                const originalIndex = question.answers.findIndex(answer => answer === answerText);
-                if (originalIndex === question.correct) {
-                    return i;
-                }
-            }
-            return 0;
-        }
+  selected = null;
+  nextBtn.disabled = true;
+  feedbackEl.style.display = 'none';
+  updateProgress();
+}
 
-        // Funkcja aktualizująca postęp
-        function updateProgress() {
-            const progress = ((currentQuestionIndex + 1) / currentQuestions.length) * 100;
-            document.getElementById('progress-fill').style.width = `${progress}%`;
-            document.getElementById('current-question').textContent = currentQuestionIndex + 1;
-            document.getElementById('total-questions').textContent = currentQuestions.length;
-            document.getElementById('current-score').textContent = score;
-        }
+function selectAnswer(shuffledIndex, originalIndex, element) {
+  if (feedbackEl.style.display === 'block') return; // już sprawdzone
 
-        // Funkcja wyświetlająca podsumowanie
-        function showSummary() {
-            document.getElementById('question-container').style.display = 'none';
-            document.getElementById('summary-container').style.display = 'block';
-            
-            const percentage = Math.round((score / currentQuestions.length) * 100);
-            const finalScore = document.getElementById('final-score');
-            const finalPercentage = document.getElementById('final-percentage');
-            const resultMessage = document.getElementById('result-message');
-            const answersSummary = document.getElementById('answers-summary');
-            
-            finalScore.textContent = score;
-            finalPercentage.textContent = `${percentage}%`;
-            
-            if (percentage >= 70) {
-                resultMessage.innerHTML = `<div class="passed">✓ Test zaliczony! ${score}/${currentQuestions.length} punktów (${percentage}%)</div>`;
-            } else {
-                resultMessage.innerHTML = `<div class="failed">✗ Test niezaliczony. ${score}/${currentQuestions.length} punktów (${percentage}%)</div>`;
-            }
-            
-            // Wyświetlenie szczegółów odpowiedzi
-            answersSummary.innerHTML = '';
-            userAnswers.forEach((answer, index) => {
-                const li = document.createElement('li');
-                const isCorrect = answer.isCorrect;
-                const userAnswerLetter = String.fromCharCode(65 + getAnswerLetterIndex(answer.userAnswer, index));
-                const correctAnswerLetter = String.fromCharCode(65 + getAnswerLetterIndex(answer.correctAnswer, index));
-                
-                // Skrócony tekst pytania
-                const shortQuestion = answer.question.length > 60 
-                    ? answer.question.substring(0, 60) + "..." 
-                    : answer.question;
-                
-                li.innerHTML = `
-                    <div>
-                        <strong>Pytanie ${index + 1}:</strong> ${shortQuestion}
-                    </div>
-                    <div>
-                        <span class="${isCorrect ? 'correct-answer' : 'incorrect-answer'}">${isCorrect ? '✓' : '✗'} ${userAnswerLetter}</span>
-                        ${!isCorrect ? ` | Poprawna: <span class="correct-answer">${correctAnswerLetter}</span>` : ''}
-                    </div>
-                `;
-                answersSummary.appendChild(li);
-            });
-        }
+  // odznacz wszystkie
+  document.querySelectorAll('.answer-option').forEach(el => el.classList.remove('selected'));
+  element.classList.add('selected');
+  
+  selected = { shuffledIndex, originalIndex };
+  nextBtn.disabled = false;
+}
 
-        // Pomocnicza funkcja do znalezienia litery odpowiedzi
-        function getAnswerLetterIndex(answerIndex, questionIndex) {
-            // W tej implementacji nie mamy zapisanej kolejności odpowiedzi dla każdego pytania
-            // Zwracamy oryginalny indeks, który odpowiada literze A, B, C, D
-            return answerIndex;
-        }
+function nextQuestion() {
+  if (selected === null) return;
 
-        // Funkcja restartująca test
-        function restartTest() {
-            document.getElementById('start-screen').style.display = 'block';
-            document.getElementById('question-container').style.display = 'none';
-            document.getElementById('summary-container').style.display = 'none';
-        }
+  // jeszcze nie sprawdzaliśmy odpowiedzi → sprawdzamy
+  if (feedbackEl.style.display !== 'block') {
+    checkAnswer();
+    return;
+  }
 
-        // Inicjalizacja
-        document.addEventListener('DOMContentLoaded', function() {
-            // Ustawienie liczby pytań w teście
-            document.getElementById('total-questions').textContent = allQuestions.length;
-        });
-    </script>
+  // zapisujemy odpowiedź
+  const q = questions[currentIndex];
+  const isCorrect = selected.originalIndex === q.correct;
+  
+  userAnswers.push({
+    questionIndex: currentIndex,
+    questionText: q.question,
+    selectedOriginal: selected.originalIndex,
+    correctOriginal: q.correct,
+    isCorrect
+  });
+
+  if (isCorrect) score++;
+
+  currentIndex++;
+
+  if (currentIndex < questions.length) {
+    showQuestion();
+  } else {
+    showSummary();
+  }
+}
+
+function checkAnswer() {
+  if (!selected) return;
+
+  const q = questions[currentIndex];
+  const isCorrect = selected.originalIndex === q.correct;
+
+  // podświetlenie wszystkich odpowiedzi
+  document.querySelectorAll('.answer-option').forEach(el => {
+    const orig = parseInt(el.dataset.original);
+    if (orig === q.correct) {
+      el.classList.add('correct');
+    } else if (orig === selected.originalIndex) {
+      el.classList.add('incorrect');
+    }
+    el.classList.add('disabled');
+  });
+
+  feedbackEl.textContent = isCorrect 
+    ? "✓ Bardzo dobrze!" 
+    : `✗ Poprawna odpowiedź to litera ${String.fromCharCode(65 + [...document.querySelectorAll('.answer-option')].findIndex(el => parseInt(el.dataset.original) === q.correct))}`;
+  
+  feedbackEl.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
+  feedbackEl.style.display = 'block';
+
+  scoreEl.textContent = score;
+  nextBtn.textContent = currentIndex < questions.length - 1 ? "Następne pytanie" : "Zakończ i zobacz wynik";
+}
+
+function updateProgress() {
+  const progress = ((currentIndex + 1) / questions.length) * 100;
+  progressFill.style.width = progress + '%';
+  currentQEl.textContent = currentIndex + 1;
+  scoreEl.textContent = score;
+}
+
+function showSummary() {
+  document.getElementById('question-container').style.display = 'none';
+  document.getElementById('summary-container').style.display = 'block';
+
+  const percent = Math.round((score / questions.length) * 100);
+  document.getElementById('final-score').textContent = score;
+  document.getElementById('final-percentage').textContent = percent + '%';
+
+  const msg = percent >= 70 
+    ? `<div class="passed">✓ Test zaliczony! (${percent}%) </div>`
+    : `<div class="failed">✗ Test niezaliczony (${percent}%) </div>`;
+  
+  document.getElementById('result-message').innerHTML = msg;
+
+  // Szczegóły odpowiedzi
+  const list = document.getElementById('answers-summary');
+  list.innerHTML = '';
+
+  userAnswers.forEach((ans, i) => {
+    const q = questions[ans.questionIndex];
+    const userLetter = String.fromCharCode(65 + q.answers.indexOf(q.answers[ans.selectedOriginal]));
+    const correctLetter = String.fromCharCode(65 + q.answers.indexOf(q.answers[ans.correctOriginal]));
+
+    const li = document.createElement('li');
+    li.innerHTML = `
+      <div><strong>${i+1}.</strong> ${q.question.substring(0,70)}${q.question.length>70?'...':''}</div>
+      <div>
+        Twoja: <span class="${ans.isCorrect?'correct-answer':'incorrect-answer'}">${userLetter}</span>
+        ${ans.isCorrect ? '' : ` | Poprawna: <span class="correct-answer">${correctLetter}</span>`}
+      </div>
+    `;
+    list.appendChild(li);
+  });
+}
+
+// Eventy
+document.getElementById('start-btn').onclick = initTest;
+document.getElementById('next-btn').onclick = nextQuestion;
+document.getElementById('restart-btn').onclick = () => location.reload();
+document.getElementById('restart-summary-btn').onclick = () => location.reload();
+</script>
 </body>
 </html>
